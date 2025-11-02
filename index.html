@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>علاء | حلول الذكاء الاصطناعي</title>
+  <meta name="description" content="مكانك الأول لجعل الذكاء الاصطناعي شريكاً لك في العمل. حلول عملية ومخصصة للأتمتة ودمج الذكاء الاصطناعي في سير عملك." />
+  <meta property="og:title" content="علاء | لحلول الذكاء الاصطناعي" />
+  <meta property="og:description" content="أشخّص سير عملك وأبني لك حلول ذكاء اصطناعي تُعيد لك الوقت." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#FFFFFF" />
+
+  <!-- Tailwind (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        container: { center: true, padding: '1rem' },
+        extend: {
+          fontFamily: {
+            arabic: ['Cairo', 'system-ui', 'ui-sans-serif', 'Segoe UI', 'Tahoma', 'sans-serif'],
+            english: ['Inter', 'system-ui', 'ui-sans-serif', 'Segoe UI', 'Tahoma', 'sans-serif'],
+          },
+          colors: {
+            base: {
+              50:  '#F8FAFC',
+              100: '#F1F5F9',
+              200: '#E2E8F0',
+              300: '#CBD5E1',
+              600: '#475569',
+              800: '#0F172A'
+            },
+            primary: {
+              50:  '#F0F9FF',
+              100: '#E0F2FE',
+              500: '#0EA5E9',
+              600: '#0284C7',
+              700: '#0369A1'
+            },
+            accent: {
+              50:  '#F0FDFA',
+              100: '#CCFBF1',
+              500: '#14B8A6',
+              600: '#0D9488',
+              700: '#0F766E'
+            }
+          },
+          boxShadow: {
+            soft: '0 10px 30px rgba(2, 8, 23, 0.08)'
+          },
+          backgroundImage: {
+            'hero-gradient': 'radial-gradient(1000px 500px at 85% -10%, rgba(14,165,233,0.18), rgba(13,148,136,0.10) 35%, rgba(255,255,255,0) 70%)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html, body { height: 100%; }
+    body {
+      font-family: "Cairo", "Inter", system-ui, -apple-system, Segoe UI, Tahoma, sans-serif;
+      color: #0F172A;
+      background: #FFFFFF;
+    }
+    .focus-ring:focus-visible { outline: 2px solid #0284C7; outline-offset: 2px; }
+
+    /* تكريم لذوي الحساسية للحركة */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+    }
+
+    /* تأثير ظل للهيدر عند التمرير */
+    header.header { transition: box-shadow .25s ease, background-color .25s ease, border-color .25s ease; }
+    header.header.scrolled { box-shadow: 0 8px 24px rgba(2, 8, 23, 0.06); background: rgba(255,255,255,.92); border-color: #E2E8F0; }
+
+    /* بطاقات ترفع قليلاً عند المرور */
+    .card-hover { transition: transform .25s ease, box-shadow .25s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(2,8,23,0.10); }
+  </style>
+</head>
+
+<body class="antialiased selection:bg-primary-100">
+  <!-- ===== Header / Nav ===== -->
+  <header class="header sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/70 bg-white/90 border-b border-slate-200">
+    <nav class="container max-w-7xl flex items-center justify-between py-3" data-reveal="down" data-delay="0">
+      <a href="#" class="inline-flex items-center gap-2 hover:opacity-90" aria-label="الصفحة الرئيسية">
+        <span class="inline-grid place-items-center w-9 h-9 rounded-xl bg-gradient-to-br from-primary-600 to-accent-600 text-white shadow-soft">
+          <span class="font-english font-bold text-sm">AL</span>
+        </span>
+        <span class="font-bold text-slate-900">علاء لاب | لحلول الذكاء الاصطناعي</span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-6 text-sm">
+        <a href="#portfolio" class="text-slate-700 hover:text-slate-900">أعمالي</a>
+        <a href="#process" class="text-slate-700 hover:text-slate-900">آلية العمل</a>
+        <a href="#who" class="text-slate-700 hover:text-slate-900">لمن أساعد</a>
+        <a href="downloads.html" class="text-slate-700 hover:text-slate-900">التحميلات</a>
+        <a href="#cta" class="px-4 py-2 rounded-xl bg-primary-600 text-white hover:bg-primary-700 transition focus-ring">احجز استشارة</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===== Hero ===== -->
+    <section class="relative isolate overflow-hidden bg-hero-gradient">
+      <div class="container max-w-7xl py-14 lg:py-22">
+        <div class="grid lg:grid-cols-2 items-center gap-10">
+          <!-- Text -->
+          <div class="space-y-6" data-reveal="up" data-delay="0">
+            <h1 class="text-3xl/tight sm:text-4xl/tight lg:text-5xl/tight font-extrabold text-slate-900">
+              مكانك الأول لجعل <span class="text-primary-600">الذكاء الاصطناعي</span> شريكاً لك في العمل
+            </h1>
+            <p class="text-base sm:text-lg text-slate-700 leading-8" data-reveal="up" data-delay="80">
+              أنا علاء، الشخص الذي سيسألك عن عملك، يُحلّلُ ويُشخّص كل زاوية قابلة للأتمتة فيه، ويبني لك حلولاً تُعيد لك الوقت المسروق.
+            </p>
+
+            <div class="flex flex-wrap gap-3" data-stagger="80">
+              <a href="#portfolio" class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-primary-600 text-white hover:bg-primary-700 transition shadow-soft focus-ring">استكشف أعمالي</a>
+              <a href="#contact" class="inline-flex items-center justify-center px-5 py-3 rounded-xl border border-slate-300 text-slate-800 hover:bg-slate-50 transition focus-ring">تواصل معي</a>
+            </div>
+
+            <div class="flex flex-wrap gap-2 pt-3" data-stagger="40">
+              <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-xs">RAG Systems</span>
+              <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-xs">AI Agent Development</span>
+              <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-xs">No-code Automation (n8n, Make)</span>
+              <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-xs">API Integration & System Design</span>
+              <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-xs">Custom AI Applications</span>
+              <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-xs">Workflow Automation</span>
+            </div>
+          </div>
+
+          <!-- Photo -->
+          <div class="relative" data-reveal="left" data-delay="120">
+            <div class="absolute -inset-4 -z-10 bg-gradient-to-br from-primary-600/10 to-accent-600/10 blur-3xl rounded-3xl" data-parallax="0.15"></div>
+            <img
+              src="personalphoto.jpg"
+              alt="صورة علاء"
+              class="w-full max-w-xs mx-auto rounded-3xl shadow-soft object-cover aspect-[3/4]"
+              loading="lazy" decoding="async"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Video Intro ===== -->
+    <section class="container max-w-6xl py-14 lg:py-20" data-reveal="up">
+      <h2 class="text-2xl lg:text-3xl font-extrabold mb-6 text-slate-900">من أنا؟</h2>
+      <div class="mx-auto max-w-4xl rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-soft card-hover">
+        <div class="relative w-full aspect-video">
+          <iframe
+            id="introVideo"
+            src="https://www.youtube-nocookie.com/embed/eQ78L1ENCrE?start=199"
+            title="تعريف علاء"
+            class="absolute inset-0 w-full h-full"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Portfolio ===== -->
+    <section id="portfolio" class="bg-slate-50 border-y border-slate-200">
+      <div class="container max-w-6xl py-14 lg:py-20">
+        <div class="mb-10" data-reveal="up">
+          <p class="text-sm uppercase tracking-wider text-slate-500 font-english">Portfolio</p>
+          <h2 class="text-2xl lg:text-3xl font-extrabold text-slate-900">أعمالي السابقة</h2>
+        </div>
+
+        <div class="space-y-12">
+          <!-- Project 1 -->
+          <div data-reveal="up">
+            <div class="flex items-center justify-between mb-6">
+              <div class="flex items-start gap-3">
+                <span class="flex-shrink-0 w-8 h-8 rounded-lg bg-primary-600 text-white grid place-items-center font-bold text-sm">1</span>
+                <div>
+                  <h3 class="text-lg md:text-xl font-bold text-slate-900">Transcriber</h3>
+                  <p class="text-xs text-slate-500 font-english mt-1">Next.js · OpenAI · Speech-to-Text · Supabase</p>
+                </div>
+              </div>
+            </div>
+            <p class="text-slate-700 leading-7 mb-6">
+              تطبيق متخصص في تسجيل الاجتماعات باستخدام الذكاء الاصطناعي، ثم استخراج الإجراءات المطلوبة والنقاط الرئيسية تلقائياً من النص.
+            </p>
+            <!-- Images Container -->
+            <div class="rounded-2xl border border-slate-200/80 bg-gradient-to-br from-slate-50 to-slate-100/40 p-4 md:p-6 backdrop-blur-sm">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Image 1 -->
+                <div class="group">
+                  <div class="rounded-xl border border-slate-300/50 bg-gradient-to-br from-white/80 to-slate-50/60 p-3 hover:border-primary-400/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/10 relative overflow-hidden">
+                    <div class="relative w-full">
+                      <img src="transcriber1st.png" alt="لقطة من Transcriber" class="w-full h-auto object-cover rounded-lg transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                      <div class="absolute inset-0 bg-gradient-to-t from-primary-600/60 via-accent-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                      <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-4 rounded-b-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-sm text-white font-medium text-center">لقطة من Transcriber</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Image 2 -->
+                <div class="group">
+                  <div class="rounded-xl border border-slate-300/50 bg-gradient-to-br from-white/80 to-slate-50/60 p-3 hover:border-primary-400/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/10 relative overflow-hidden">
+                    <div class="relative w-full">
+                      <img src="transcriber2ndphoto.png" alt="لقطة من Transcriber" class="w-full h-auto object-cover rounded-lg transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                      <div class="absolute inset-0 bg-gradient-to-t from-primary-600/60 via-accent-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                      <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-4 rounded-b-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-sm text-white font-medium text-center">لقطة من Transcriber</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div data-reveal="up" data-delay="50">
+            <div class="flex items-center justify-between mb-6">
+              <div class="flex items-start gap-3">
+                <span class="flex-shrink-0 w-8 h-8 rounded-lg bg-primary-600 text-white grid place-items-center font-bold text-sm">2</span>
+                <div>
+                  <h3 class="text-lg md:text-xl font-bold text-slate-900">Agent Dashboard</h3>
+                  <p class="text-xs text-slate-500 font-english mt-1">FastAPI · Next.js · n8n · PostgreSQL</p>
+                </div>
+              </div>
+            </div>
+            <p class="text-slate-700 leading-7 mb-6">
+              لوحة تحكم متقدمة لإدارة وكلاء الذكاء الاصطناعي، تنفيذ المهام تلقائياً، ومراقبة الأداء في الوقت الفعلي.
+            </p>
+            <div class="rounded-2xl border border-slate-200/80 bg-gradient-to-br from-slate-50 to-slate-100/40 p-4 md:p-6 backdrop-blur-sm">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="group">
+                  <div class="rounded-xl border border-slate-300/50 bg-gradient-to-br from-white/80 to-slate-50/60 p-3 hover:border-primary-400/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/10 relative overflow-hidden">
+                    <div class="relative w-full">
+                      <img src="https://picsum.photos/seed/agent1/800/600" alt="لقطة من Agent Dashboard" class="w-full h-auto object-cover rounded-lg transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                      <div class="absolute inset-0 bg-gradient-to-t from-primary-600/60 via-accent-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                      <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-4 rounded-b-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-sm text-white font-medium text-center">لقطة من Agent Dashboard</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="group">
+                  <div class="rounded-xl border border-slate-300/50 bg-gradient-to-br from-white/80 to-slate-50/60 p-3 hover:border-primary-400/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/10 relative overflow-hidden">
+                    <div class="relative w-full">
+                      <img src="https://picsum.photos/seed/agent2/800/600" alt="لقطة من Agent Dashboard" class="w-full h-auto object-cover rounded-lg transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                      <div class="absolute inset-0 bg-gradient-to-t from-primary-600/60 via-accent-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                      <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-4 rounded-b-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-sm text-white font-medium text-center">لقطة من Agent Dashboard</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div data-reveal="up" data-delay="100">
+            <div class="flex items-center justify-between mb-6">
+              <div class="flex items-start gap-3">
+                <span class="flex-shrink-0 w-8 h-8 rounded-lg bg-primary-600 text-white grid place-items-center font-bold text-sm">3</span>
+                <div>
+                  <h3 class="text-lg md:text-xl font-bold text-slate-900">Docs RAG System</h3>
+                  <p class="text-xs text-slate-500 font-english mt-1">RAG · pgvector · Supabase · OpenAI</p>
+                </div>
+              </div>
+            </div>
+            <p class="text-slate-700 leading-7 mb-6">
+              نظام استرجاع ذكي للمستندات يستخدم RAG للإجابة على الأسئلة من قاعدة معرفة الشركة بدقة عالية.
+            </p>
+            <div class="rounded-2xl border border-slate-200/80 bg-gradient-to-br from-slate-50 to-slate-100/40 p-4 md:p-6 backdrop-blur-sm">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="group">
+                  <div class="rounded-xl border border-slate-300/50 bg-gradient-to-br from-white/80 to-slate-50/60 p-3 hover:border-primary-400/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/10 relative overflow-hidden">
+                    <div class="relative w-full">
+                      <img src="https://picsum.photos/seed/rag1/800/600" alt="لقطة من Docs RAG" class="w-full h-auto object-cover rounded-lg transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                      <div class="absolute inset-0 bg-gradient-to-t from-primary-600/60 via-accent-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                      <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-4 rounded-b-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-sm text-white font-medium text-center">لقطة من Docs RAG</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="group">
+                  <div class="rounded-xl border border-slate-300/50 bg-gradient-to-br from-white/80 to-slate-50/60 p-3 hover:border-primary-400/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/10 relative overflow-hidden">
+                    <div class="relative w-full">
+                      <img src="https://picsum.photos/seed/rag2/800/600" alt="لقطة من Docs RAG" class="w-full h-auto object-cover rounded-lg transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                      <div class="absolute inset-0 bg-gradient-to-t from-primary-600/60 via-accent-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                      <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-4 rounded-b-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-sm text-white font-medium text-center">لقطة من Docs RAG</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 4 -->
+          <div data-reveal="up" data-delay="150">
+            <div class="flex items-center justify-between mb-6">
+              <div class="flex items-start gap-3">
+                <span class="flex-shrink-0 w-8 h-8 rounded-lg bg-primary-600 text-white grid place-items-center font-bold text-sm">4</span>
+                <div>
+                  <h3 class="text-lg md:text-xl font-bold text-slate-900">Automation Hub</h3>
+                  <p class="text-xs text-slate-500 font-english mt-1">n8n · Make · Webhooks · OAuth</p>
+                </div>
+              </div>
+            </div>
+            <p class="text-slate-700 leading-7 mb-6">
+              مركز أتمتة متكامل يربط بين التطبيقات المختلفة ويؤتمت المهام المتكررة باستخدام APIs وأدوات لاكود.
+            </p>
+            <div class="rounded-2xl border border-slate-200/80 bg-gradient-to-br from-slate-50 to-slate-100/40 p-4 md:p-6 backdrop-blur-sm">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="group">
+                  <div class="rounded-xl border border-slate-300/50 bg-gradient-to-br from-white/80 to-slate-50/60 p-3 hover:border-primary-400/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/10 relative overflow-hidden">
+                    <div class="relative w-full">
+                      <img src="https://picsum.photos/seed/auto1/800/600" alt="لقطة من Automation Hub" class="w-full h-auto object-cover rounded-lg transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                      <div class="absolute inset-0 bg-gradient-to-t from-primary-600/60 via-accent-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                      <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-4 rounded-b-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-sm text-white font-medium text-center">لقطة من Automation Hub</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="group">
+                  <div class="rounded-xl border border-slate-300/50 bg-gradient-to-br from-white/80 to-slate-50/60 p-3 hover:border-primary-400/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/10 relative overflow-hidden">
+                    <div class="relative w-full">
+                      <img src="https://picsum.photos/seed/auto2/800/600" alt="لقطة من Automation Hub" class="w-full h-auto object-cover rounded-lg transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                      <div class="absolute inset-0 bg-gradient-to-t from-primary-600/60 via-accent-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                      <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-4 rounded-b-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-sm text-white font-medium text-center">لقطة من Automation Hub</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Process ===== -->
+    <section id="process" class="container max-w-6xl py-14 lg:py-20">
+      <h2 class="text-2xl lg:text-3xl font-extrabold mb-8 text-slate-900" data-reveal="up">العملية بسيطة:</h2>
+
+      <ol class="grid lg:grid-cols-3 gap-6" data-stagger="80">
+        <li class="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-soft card-hover">
+          <div class="w-10 h-10 rounded-xl bg-primary-600 text-white grid place-items-center font-bold">1</div>
+          <h3 class="mt-4 font-bold text-lg text-slate-900">جلسة استكشافية</h3>
+          <p class="mt-2 text-slate-700">نلتقي سوياً، أسألك عن سير عملك، النقاط التي تعطلك، أفهم كل التفاصيل اللازمة، لنسمّها جلسة تشخيص.</p>
+        </li>
+
+        <li class="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-soft card-hover">
+          <div class="w-10 h-10 rounded-xl bg-primary-600 text-white grid place-items-center font-bold">2</div>
+          <h3 class="mt-4 font-bold text-lg text-slate-900">خطة الحل</h3>
+          <p class="mt-2 text-slate-700">أحدد المشاكل وأصمم الحل - سواء كان أدوات موجودة لم تكن تعرفها، مزيج من الأنظمة، أو نظام مخصص مبني خصيصاً لك بالـ AI.</p>
+        </li>
+
+        <li class="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-soft card-hover">
+          <div class="w-10 h-10 rounded-xl bg-primary-600 text-white grid place-items-center font-bold">3</div>
+          <h3 class="mt-4 font-bold text-lg text-slate-900">التنفيذ والتسليم</h3>
+          <p class="mt-2 text-slate-700">أبني، أطبق، وأسلمك الحل. تحصل على النظام جاهزاً، تحصل على تدريب على استخدامه، ودعم لما قد يلزم لاحقاً.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ===== Who I Help ===== -->
+    <section id="who" class="bg-slate-50 border-y border-slate-200">
+      <div class="container max-w-6xl py-14 lg:py-20">
+        <h2 class="text-2xl lg:text-3xl font-extrabold mb-4 text-slate-900" data-reveal="up">هل أنا مناسب لك؟</h2>
+        <p class="text-slate-700 mb-6" data-reveal="up" data-delay="80">إذا كنت تعاني من واحدة من هذه المشاكل، أنا هنا لمساعدتك:</p>
+
+        <ul class="grid sm:grid-cols-2 gap-4" data-stagger="70">
+          <li class="flex gap-3 rounded-xl border border-slate-200 bg-white p-4 shadow-soft card-hover">
+            <span class="mt-1.5 shrink-0 w-6 h-6 rounded-full bg-accent-600/10 text-accent-700 grid place-items-center">
+              <svg viewBox="0 0 24 24" class="w-3.5 h-3.5" aria-hidden="true"><path fill="currentColor" d="M9 16.2 5.5 12.7l1.4-1.4L9 13.4l7.1-7.1 1.4 1.4z"/></svg>
+            </span>
+            <p class="text-slate-800">تقضي ساعات في مهام متكررة يمكن أن تكون آلية</p>
+          </li>
+
+          <li class="flex gap-3 rounded-xl border border-slate-200 bg-white p-4 shadow-soft card-hover">
+            <span class="mt-1.5 shrink-0 w-6 h-6 rounded-full bg-accent-600/10 text-accent-700 grid place-items-center">
+              <svg viewBox="0 0 24 24" class="w-3.5 h-3.5" aria-hidden="true"><path fill="currentColor" d="M9 16.2 5.5 12.7l1.4-1.4L9 13.4l7.1-7.1 1.4 1.4z"/></svg>
+            </span>
+            <p class="text-slate-800">تعرف أن الذكاء الاصطناعي يمكن أن يساعدك لكن لا تعرف من أين تبدأ أو ماذا تستخدم</p>
+          </li>
+
+          <li class="flex gap-3 rounded-xl border border-slate-200 bg-white p-4 shadow-soft card-hover">
+            <span class="mt-1.5 shrink-0 w-6 h-6 rounded-full bg-accent-600/10 text-accent-700 grid place-items-center">
+              <svg viewBox="0 0 24 24" class="w-3.5 h-3.5" aria-hidden="true"><path fill="currentColor" d="M9 16.2 5.5 12.7l1.4-1.4L9 13.4l7.1-7.1 1.4 1.4z"/></svg>
+            </span>
+            <p class="text-slate-800">عندك مشكلة في سير العمل وتشعر أنك "مضطر للتعايش معها" بدون حل</p>
+          </li>
+
+          <li class="flex gap-3 rounded-xl border border-slate-200 bg-white p-4 shadow-soft card-hover">
+            <span class="mt-1.5 shrink-0 w-6 h-6 rounded-full bg-accent-600/10 text-accent-700 grid place-items-center">
+              <svg viewBox="0 0 24 24" class="w-3.5 h-3.5" aria-hidden="true"><path fill="currentColor" d="M9 16.2 5.5 12.7l1.4-1.4L9 13.4l7.1-7.1 1.4 1.4z"/></svg>
+            </span>
+            <p class="text-slate-800">تبحث عن حل مخصص لأن الأدوات الجاهزة لا تناسب احتياجاتك تماماً</p>
+          </li>
+
+          <li class="flex gap-3 rounded-xl border border-slate-200 bg-white p-4 sm:col-span-2 shadow-soft card-hover">
+            <span class="mt-1.5 shrink-0 w-6 h-6 rounded-full bg-accent-600/10 text-accent-700 grid place-items-center">
+              <svg viewBox="0 0 24 24" class="w-3.5 h-3.5" aria-hidden="true"><path fill="currentColor" d="M9 16.2 5.5 12.7l1.4-1.4L9 13.4l7.1-7.1 1.4 1.4z"/></svg>
+            </span>
+            <p class="text-slate-800">تريد أن تبقى على اطّلاع على آخر حلول الذكاء الاصطناعي لرفع إنتاجيّتك</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== Final CTA ===== -->
+    <section id="cta" class="container max-w-4xl py-16 lg:py-24" data-reveal="up">
+      <div class="rounded-3xl border border-slate-200 bg-white p-8 lg:p-12 shadow-soft text-center card-hover">
+        <h2 class="text-2xl lg:text-3xl font-extrabold mb-4 text-slate-900">لِنبدأ</h2>
+        <p class="text-slate-700 leading-8">
+          أخبرني عن عملك والمشكلات التي تواجهها. سأقترح عليك الخطة الأفضل: من توصية أداة بسيطة، إلى أتمتة متكاملة، إلى بناء نظام مخصص بالذكاء الاصطناعي.
+        </p>
+
+        <div class="mt-6 flex flex-col items-center gap-4" data-stagger="100">
+          <button
+            id="ctaButton"
+            class="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-primary-600 text-white hover:bg-primary-700 transition shadow-soft focus-ring"
+            type="button"
+          >
+            تواصل معي
+          </button>
+
+          <!-- Contact Options (expandable) -->
+          <div id="contactOptions" class="hidden w-full">
+            <div class="grid sm:grid-cols-2 gap-4 mt-2">
+              <!-- WhatsApp -->
+              <a
+                href="https://wa.me/905340718990"
+                target="_blank"
+                rel="noopener"
+                class="group flex flex-col items-center gap-3 rounded-2xl border border-slate-200 bg-white p-5 hover:bg-slate-50 transition text-center shadow-soft card-hover"
+                aria-label="تواصل واتساب"
+              >
+                <span class="w-12 h-12 rounded-xl bg-accent-600/10 text-accent-700 grid place-items-center">
+                  <svg viewBox="0 0 24 24" class="w-6 h-6" aria-hidden="true"><path fill="currentColor" d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg>
+                </span>
+                <div>
+                  <p class="font-semibold text-slate-900">واتساب</p>
+                  <p class="text-sm text-slate-600 font-english">+90 534 071 8990</p>
+                </div>
+              </a>
+
+              <!-- Email -->
+              <div class="group/email relative rounded-2xl border border-slate-200 bg-white p-5 text-center hover:bg-slate-50 transition shadow-soft card-hover">
+                <a
+                  href="mailto:contact@alaalab.com"
+                  class="flex flex-col items-center gap-3 hover:opacity-80 transition"
+                  aria-label="تواصل عبر البريد"
+                >
+                  <span class="w-12 h-12 rounded-xl bg-primary-600/10 text-primary-700 grid place-items-center">
+                    <svg viewBox="0 0 24 24" class="w-6 h-6" aria-hidden="true"><path fill="currentColor" d="M3 6h18v12H3z"/><path fill="#fff" d="M3 6l9 6 9-6"/></svg>
+                  </span>
+                  <div>
+                    <p class="font-semibold text-slate-900">Email</p>
+                    <p class="text-sm text-slate-600 font-english">contact@alaalab.com</p>
+                  </div>
+                </a>
+                <button
+                  onclick="copyEmail()"
+                  class="absolute top-3 left-3 w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 grid place-items-center transition-all focus-ring opacity-0 group-hover/email:opacity-100"
+                  aria-label="نسخ البريد الإلكتروني"
+                  title="نسخ البريد"
+                >
+                  <svg viewBox="0 0 24 24" class="w-4 h-4" aria-hidden="true"><path fill="currentColor" d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1z"/><path fill="currentColor" d="M19 5H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>
+                </button>
+              </div>
+
+              <!-- Instagram -->
+              <a
+                href="https://www.instagram.com/alaamjaish"
+                target="_blank" rel="noopener"
+                class="group flex flex-col items-center gap-3 rounded-2xl border border-slate-200 bg-white p-5 hover:bg-slate-50 transition text-center shadow-soft card-hover"
+                aria-label="انستغرام"
+              >
+                <span class="w-12 h-12 rounded-xl bg-slate-100 text-slate-700 grid place-items-center">
+                  <svg viewBox="0 0 24 24" class="w-6 h-6" aria-hidden="true"><path fill="currentColor" d="M7 5h10a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a4 4 0 0 1 4-4z"/><circle cx="12" cy="12" r="3.2" fill="#fff"/></svg>
+                </span>
+                <div>
+                  <p class="font-semibold text-slate-900">Instagram</p>
+                  <p class="text-sm text-slate-600 font-english">@alaamjaish</p>
+                </div>
+              </a>
+
+              <!-- YouTube -->
+              <a
+                href="https://www.youtube.com/@alaamjaish"
+                target="_blank" rel="noopener"
+                class="group flex flex-col items-center gap-3 rounded-2xl border border-slate-200 bg-white p-5 hover:bg-slate-50 transition text-center shadow-soft card-hover"
+                aria-label="يوتيوب"
+              >
+                <span class="w-12 h-12 rounded-xl bg-slate-100 text-slate-700 grid place-items-center">
+                  <svg viewBox="0 0 24 24" class="w-6 h-6" aria-hidden="true"><path fill="currentColor" d="M21 7a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V7z"/><path fill="#fff" d="M10 15.5v-7l6 3.5z"/></svg>
+                </span>
+                <div>
+                  <p class="font-semibold text-slate-900">YouTube</p>
+                  <p class="text-sm text-slate-600 font-english">youtube.com/@Alaamjaish</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer id="contact" class="border-t border-slate-200 bg-white">
+    <div class="container max-w-7xl py-10">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-3" data-stagger="60">
+          <a href="https://wa.me/905340718990" target="_blank" rel="noopener" class="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 grid place-items-center hover:bg-slate-200 transition focus-ring" aria-label="واتساب">
+            <svg viewBox="0 0 24 24" class="w-5 h-5" aria-hidden="true"><path fill="currentColor" d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg>
+          </a>
+          <a href="mailto:contact@alaalab.com" class="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 grid place-items-center hover:bg-slate-200 transition focus-ring" aria-label="البريد">
+            <svg viewBox="0 0 24 24" class="w-5 h-5" aria-hidden="true"><path fill="currentColor" d="M3 6h18v12H3z"/><path fill="#fff" d="M3 6l9 6 9-6"/></svg>
+          </a>
+          <a href="https://www.instagram.com/alaamjaish" target="_blank" rel="noopener" class="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 grid place-items-center hover:bg-slate-200 transition focus-ring" aria-label="انستغرام">
+            <svg viewBox="0 0 24 24" class="w-5 h-5" aria-hidden="true"><path fill="currentColor" d="M7 5h10a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a4 4 0 0 1 4-4z"/><circle cx="12" cy="12" r="3" fill="#fff"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@Alaamjaish" target="_blank" rel="noopener" class="w-10 h-10 rounded-xl bg-slate-100 text-slate-700 grid place-items-center hover:bg-slate-200 transition focus-ring" aria-label="يوتيوب">
+            <svg viewBox="0 0 24 24" class="w-5 h-5" aria-hidden="true"><path fill="currentColor" d="M21 7a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V7z"/><path fill="#fff" d="M10 15.5v-7l6 3.5z"/></svg>
+          </a>
+        </div>
+
+        <p class="text-slate-600 text-sm" data-reveal="up">© 2025 Alaalab. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed top-4 right-4 bg-accent-600 text-white px-5 py-3 rounded-xl shadow-soft font-semibold opacity-0 pointer-events-none transition-opacity duration-300 z-50">
+    ✓ تم نسخ البريد الإلكتروني
+  </div>
+
+  <!-- ===== Scripts: Reveal + Parallax + Header shadow + CTA ===== -->
+  <script>
+    // Header shadow on scroll
+    const header = document.querySelector('header.header');
+    const toggleHeaderShadow = () => {
+      if (window.scrollY > 8) header.classList.add('scrolled'); else header.classList.remove('scrolled');
+    };
+    toggleHeaderShadow();
+    window.addEventListener('scroll', toggleHeaderShadow, { passive: true });
+
+    // Copy email to clipboard
+    function copyEmail() {
+      const email = 'contact@alaalab.com';
+      navigator.clipboard.writeText(email).then(() => {
+        const toast = document.getElementById('toast');
+        toast.classList.remove('opacity-0');
+        toast.classList.add('opacity-100');
+        setTimeout(() => { toast.classList.remove('opacity-100'); toast.classList.add('opacity-0'); }, 2000);
+      }).catch(err => console.error('Failed to copy:', err));
+    }
+
+    // CTA expand
+    const btn = document.getElementById('ctaButton');
+    const panel = document.getElementById('contactOptions');
+    if (btn && panel) {
+      btn.addEventListener('click', () => {
+        panel.classList.toggle('hidden');
+        if (!panel.classList.contains('hidden')) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+    }
+
+    // ==== Scroll Reveal (lightweight, no libs)
+    (function() {
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced) return;
+
+      const baseTransition = 'opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1)';
+      const els = Array.from(document.querySelectorAll('[data-reveal]'));
+      const getInitial = (type) => {
+        switch ((type || 'up').toLowerCase()) {
+          case 'down': return 'translateY(-18px)';
+          case 'left': return 'translateX(22px)';
+          case 'right': return 'translateX(-22px)';
+          case 'scale': return 'scale(.96)';
+          case 'fade': return 'translateY(0px)'; // fade only
+          default: return 'translateY(18px)'; // up
+        }
+      };
+
+      // Stagger containers: apply reveal to direct children
+      const staggers = Array.from(document.querySelectorAll('[data-stagger]'));
+      staggers.forEach(container => {
+        const gap = parseInt(container.dataset.stagger || '80', 10);
+        const children = Array.from(container.children);
+        children.forEach((child, i) => {
+          if (!child.hasAttribute('data-reveal')) child.setAttribute('data-reveal', 'up');
+          child.setAttribute('data-delay', (i * gap).toString());
+          els.push(child);
+        });
+      });
+
+      // Prepare elements
+      els.forEach(el => {
+        const type = el.dataset.reveal || 'up';
+        el.style.opacity = '0';
+        el.style.transform = getInitial(type);
+        el.style.transition = baseTransition;
+        el.style.willChange = 'opacity, transform';
+        const d = parseInt(el.dataset.delay || '0', 10);
+        if (d) el.style.transitionDelay = d + 'ms';
+      });
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+            io.unobserve(el);
+          }
+        });
+      }, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+
+      els.forEach(el => io.observe(el));
+    })();
+
+    // ==== Simple parallax for decorative blobs
+    (function() {
+      const blobs = document.querySelectorAll('[data-parallax]');
+      if (!blobs.length) return;
+      let y = window.scrollY;
+      const onScroll = () => {
+        const newY = window.scrollY;
+        if (Math.abs(newY - y) < 1) return;
+        y = newY;
+        blobs.forEach(b => {
+          const speed = parseFloat(b.dataset.parallax || '0.1');
+          b.style.transform = `translateY(${y * speed * -1}px)`;
+        });
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+  </script>
+</body>
+</html>
