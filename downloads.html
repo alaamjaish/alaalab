@@ -10,24 +10,43 @@
       theme: {
         extend: {
           colors: {
-            'base-900': '#0a0e1a',
-            'base-800': '#121827',
-            'base-700': '#1e293b',
-            'primary-600': '#3b82f6',
-            'primary-700': '#2563eb',
-            'accent-600': '#10b981'
+            base: {
+              50:  '#F8FAFC',
+              100: '#F1F5F9',
+              200: '#E2E8F0',
+              300: '#CBD5E1',
+              600: '#475569',
+              800: '#0F172A'
+            },
+            primary: {
+              50:  '#F0F9FF',
+              100: '#E0F2FE',
+              500: '#0EA5E9',
+              600: '#0284C7',
+              700: '#0369A1'
+            },
+            accent: {
+              50:  '#F0FDFA',
+              100: '#CCFBF1',
+              500: '#14B8A6',
+              600: '#0D9488',
+              700: '#0F766E'
+            }
           },
           fontFamily: {
-            sans: ['Cairo', 'sans-serif'],
-            english: ['Geist Sans', 'sans-serif']
+            arabic: ['Cairo', 'system-ui', 'ui-sans-serif', 'Segoe UI', 'Tahoma', 'sans-serif'],
+            english: ['Inter', 'system-ui', 'ui-sans-serif', 'Segoe UI', 'Tahoma', 'sans-serif']
+          },
+          boxShadow: {
+            soft: '0 10px 30px rgba(2, 8, 23, 0.08)'
           }
         }
       }
     }
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -36,14 +55,14 @@
     }
 
     body {
-      font-family: 'Cairo', sans-serif;
-      background: linear-gradient(to bottom, #0a0e1a, #121827);
-      color: white;
+      font-family: "Cairo", "Inter", system-ui, -apple-system, Segoe UI, Tahoma, sans-serif;
+      background: #FFFFFF;
+      color: #0F172A;
       min-height: 100vh;
     }
 
     .font-english {
-      font-family: 'Geist Sans', sans-serif;
+      font-family: 'Inter', system-ui, sans-serif;
     }
 
     .container {
@@ -53,16 +72,11 @@
     }
 
     .shadow-soft {
-      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      box-shadow: 0 10px 30px rgba(2, 8, 23, 0.08);
     }
 
-    .focus-ring {
-      outline: 2px solid transparent;
-      outline-offset: 2px;
-    }
-
-    .focus-ring:focus {
-      outline: 2px solid #3b82f6;
+    .focus-ring:focus-visible {
+      outline: 2px solid #0284C7;
       outline-offset: 2px;
     }
 
@@ -94,12 +108,12 @@
 
     /* Card Hover */
     .card-hover {
-      transition: transform .3s ease, box-shadow .3s ease;
+      transition: transform .25s ease, box-shadow .25s ease;
     }
 
     .card-hover:hover {
       transform: translateY(-4px);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+      box-shadow: 0 12px 32px rgba(2,8,23,0.10);
     }
 
     /* Form Styles */
@@ -109,8 +123,8 @@
 
     input:focus, textarea:focus {
       outline: none;
-      border-color: #3b82f6;
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      border-color: #0284C7;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1);
     }
 
     /* Success Message Animation */
@@ -132,35 +146,35 @@
 </head>
 <body>
   <!-- Header -->
-  <header class="border-b border-white/10 backdrop-blur-sm bg-base-900/80 sticky top-0 z-50">
-    <div class="container">
-      <div class="flex items-center justify-between h-16">
-        <a href="index.html" class="text-xl font-bold hover:text-primary-600 transition">
-          Alaalab
-        </a>
-        <a
-          href="index.html"
-          class="text-sm text-white/70 hover:text-white transition flex items-center gap-2"
-        >
-          <svg viewBox="0 0 24 24" class="w-4 h-4" fill="currentColor">
-            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
-          </svg>
-          العودة للموقع الرئيسي
-        </a>
+  <header class="border-b border-slate-200 backdrop-blur supports-[backdrop-filter]:bg-white/70 bg-white/90 sticky top-0 z-50">
+    <nav class="container max-w-7xl flex items-center justify-between py-3">
+      <a href="index.html" class="inline-flex items-center gap-2 hover:opacity-90" aria-label="الصفحة الرئيسية">
+        <span class="inline-grid place-items-center w-9 h-9 rounded-xl bg-gradient-to-br from-primary-600 to-accent-600 text-white shadow-soft">
+          <span class="font-english font-bold text-sm">AL</span>
+        </span>
+        <span class="font-bold text-slate-900">علاء لاب | لحلول الذكاء الاصطناعي</span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-6 text-sm">
+        <a href="index.html#portfolio" class="text-slate-700 hover:text-slate-900">أعمالي</a>
+        <a href="index.html#process" class="text-slate-700 hover:text-slate-900">آلية العمل</a>
+        <a href="index.html#who" class="text-slate-700 hover:text-slate-900">لمن أساعد</a>
+        <a href="downloads.html" class="text-slate-700 hover:text-slate-900 font-bold">التحميلات</a>
+        <a href="index.html#cta" class="px-4 py-2 rounded-xl bg-primary-600 text-white hover:bg-primary-700 transition focus-ring">احجز استشارة</a>
       </div>
-    </div>
+    </nav>
   </header>
 
   <main>
     <!-- Hero Section - Download Form -->
-    <section class="py-20 lg:py-32">
+    <section class="py-20 lg:py-32 bg-slate-50">
       <div class="container max-w-2xl">
         <div class="text-center mb-12" data-reveal="up">
           <p class="text-sm uppercase tracking-wider text-primary-600 font-english mb-3">Free Resource</p>
-          <h1 class="text-3xl lg:text-5xl font-extrabold mb-6">
+          <h1 class="text-3xl lg:text-5xl font-extrabold text-slate-900 mb-6">
             حمّل دليل الأدوات المجاني
           </h1>
-          <p class="text-lg lg:text-xl text-white/80 leading-relaxed">
+          <p class="text-lg lg:text-xl text-slate-700 leading-relaxed">
             أدخل بريدك الإلكتروني وسنرسل لك الملف مباشرة
           </p>
         </div>
@@ -168,14 +182,14 @@
         <!-- Form Card -->
         <div
           id="formCard"
-          class="rounded-3xl border border-white/10 bg-gradient-to-br from-base-800 to-base-700 p-8 lg:p-12 shadow-soft"
+          class="rounded-3xl border border-slate-200 bg-white p-8 lg:p-12 shadow-soft"
           data-reveal="up"
           data-delay="100"
         >
           <form id="downloadForm" class="space-y-6">
             <!-- Name Field -->
             <div>
-              <label for="name" class="block text-sm font-semibold mb-2">
+              <label for="name" class="block text-sm font-semibold text-slate-900 mb-2">
                 الاسم
               </label>
               <input
@@ -183,14 +197,14 @@
                 id="name"
                 name="name"
                 required
-                class="w-full px-4 py-3 rounded-xl bg-base-900 border border-white/10 text-white placeholder-white/40 focus-ring"
+                class="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 text-slate-900 placeholder-slate-400 focus-ring"
                 placeholder="أدخل اسمك الكامل"
               />
             </div>
 
             <!-- Email Field -->
             <div>
-              <label for="email" class="block text-sm font-semibold mb-2">
+              <label for="email" class="block text-sm font-semibold text-slate-900 mb-2">
                 البريد الإلكتروني
               </label>
               <input
@@ -198,7 +212,7 @@
                 id="email"
                 name="email"
                 required
-                class="w-full px-4 py-3 rounded-xl bg-base-900 border border-white/10 text-white placeholder-white/40 focus-ring font-english"
+                class="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 text-slate-900 placeholder-slate-400 focus-ring font-english"
                 placeholder="your@email.com"
               />
             </div>
@@ -206,12 +220,12 @@
             <!-- Submit Button -->
             <button
               type="submit"
-              class="w-full px-6 py-4 rounded-xl bg-primary-600 hover:bg-primary-700 transition font-bold text-lg shadow-soft focus-ring"
+              class="w-full px-6 py-4 rounded-xl bg-primary-600 hover:bg-primary-700 text-white transition font-bold text-lg shadow-soft focus-ring"
             >
               احصل على الملف المجاني
             </button>
 
-            <p class="text-xs text-white/50 text-center">
+            <p class="text-xs text-slate-600 text-center">
               لن نرسل لك أي رسائل مزعجة. فقط الملف المجاني والمحتوى القيّم.
             </p>
           </form>
@@ -219,13 +233,13 @@
           <!-- Success Message (Hidden by default) -->
           <div id="successMessage" class="hidden success-message">
             <div class="text-center py-6">
-              <div class="w-16 h-16 rounded-full bg-accent-600/20 grid place-items-center mx-auto mb-4">
+              <div class="w-16 h-16 rounded-full bg-accent-100 grid place-items-center mx-auto mb-4">
                 <svg viewBox="0 0 24 24" class="w-8 h-8 text-accent-600" fill="currentColor">
                   <path d="M9.55 17.54 4.8 12.8l1.41-1.41 3.34 3.33 7.24-7.24 1.41 1.41z"/>
                 </svg>
               </div>
-              <h3 class="text-2xl font-bold mb-2">تم الإرسال بنجاح!</h3>
-              <p class="text-white/80">تحقق من بريدك الإلكتروني - الملف في الطريق إليك الآن.</p>
+              <h3 class="text-2xl font-bold text-slate-900 mb-2">تم الإرسال بنجاح!</h3>
+              <p class="text-slate-700">تحقق من بريدك الإلكتروني - الملف في الطريق إليك الآن.</p>
             </div>
           </div>
         </div>
@@ -233,19 +247,19 @@
     </section>
 
     <!-- While You're Here Section -->
-    <section id="whileHere" class="py-16 lg:py-24 bg-base-800/60 border-y border-white/10">
+    <section id="whileHere" class="py-16 lg:py-24 bg-white border-y border-slate-200">
       <div class="container max-w-4xl">
         <div class="text-center mb-12" data-reveal="up">
-          <h2 class="text-3xl lg:text-4xl font-extrabold mb-4">
+          <h2 class="text-3xl lg:text-4xl font-extrabold text-slate-900 mb-4">
             بينما أنت هنا...
           </h2>
         </div>
 
         <div class="space-y-8" data-reveal="up" data-delay="100">
-          <p class="text-lg text-white/80 leading-relaxed text-center">
+          <p class="text-lg text-slate-700 leading-relaxed text-center">
             أنا علاء، أبني حلول ذكاء اصطناعي مخصصة للشركات والمحترفين في العالم العربي.
           </p>
-          <p class="text-lg text-white/80 leading-relaxed text-center">
+          <p class="text-lg text-slate-700 leading-relaxed text-center">
             إذا كنت تواجه مشاكل في سير عملك وتريد حلاً عملياً - ليس فقط معلومات - أنا هنا لمساعدتك.
           </p>
 
@@ -253,13 +267,13 @@
           <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
             <button
               id="consultButton"
-              class="px-8 py-4 rounded-xl bg-primary-600 hover:bg-primary-700 transition font-bold shadow-soft focus-ring"
+              class="px-8 py-4 rounded-xl bg-primary-600 hover:bg-primary-700 text-white transition font-bold shadow-soft focus-ring"
             >
               احجز استشارة مجانية معي
             </button>
             <a
               href="index.html"
-              class="px-8 py-4 rounded-xl border border-white/20 hover:border-white/40 hover:bg-white/5 transition font-semibold focus-ring"
+              class="px-8 py-4 rounded-xl border border-slate-300 text-slate-800 hover:bg-slate-50 transition font-semibold focus-ring"
             >
               أو تعرّف أكثر على خدماتي
             </a>
@@ -274,39 +288,39 @@
               href="https://wa.me/905340718990"
               target="_blank"
               rel="noopener"
-              class="group flex flex-col items-center gap-3 rounded-2xl border border-white/10 bg-base-800 p-5 hover:border-white/30 transition text-center card-hover"
+              class="group flex flex-col items-center gap-3 rounded-2xl border border-slate-200 bg-white p-5 hover:bg-slate-50 transition text-center shadow-soft card-hover"
               aria-label="تواصل واتساب"
             >
-              <span class="w-12 h-12 rounded-xl bg-accent-600/20 grid place-items-center">
-                <svg viewBox="0 0 24 24" class="w-6 h-6"><path fill="currentColor" d="M12.01 2a10 10 0 0 0-8.6 15.09L2 22l5.07-1.33A10 10 0 1 0 12.01 2Zm5.8 14.17c-.25.7-1.23 1.28-2 1.45c-.53.12-1.22.22-3.56-.74c-2.98-1.23-4.9-4.24-5.05-4.44c-.15-.2-1.2-1.6-1.2-3.05s.76-2.16 1.03-2.46c.27-.3.6-.37.79-.37h.57c.18 0 .43-.07.67.5c.25.6.86 2.07.94 2.22c.08.15.13.33.02.53c-.1.2-.15.32-.3.5c-.15.18-.32.41-.46.55c-.15.15-.3.31-.13.6c.18.3.78 1.29 1.67 2.1c1.15 1.03 2.12 1.34 2.43 1.49c.3.15.48.13.66-.08c.18-.2.76-.88.96-1.18c.2-.3.4-.25.67-.15c.27.1 1.72.81 2.02.95c.3.15.5.22.58.35c.07.15.07.85-.18 1.55Z"/></svg>
+              <span class="w-12 h-12 rounded-xl bg-accent-600/10 text-accent-700 grid place-items-center">
+                <svg viewBox="0 0 24 24" class="w-6 h-6" aria-hidden="true"><path fill="currentColor" d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg>
               </span>
               <div>
-                <p class="font-semibold">واتساب</p>
-                <p class="text-sm text-white/70 font-english">+90 534 071 8990</p>
+                <p class="font-semibold text-slate-900">واتساب</p>
+                <p class="text-sm text-slate-600 font-english">+90 534 071 8990</p>
               </div>
             </a>
 
             <!-- Email -->
-            <div class="group/email relative rounded-2xl border border-white/10 bg-base-800 p-5 text-center hover:border-white/30 transition card-hover">
+            <div class="group/email relative rounded-2xl border border-slate-200 bg-white p-5 text-center hover:bg-slate-50 transition shadow-soft card-hover">
               <a
                 href="mailto:contact@alaalab.com"
                 class="flex flex-col items-center gap-3 hover:opacity-80 transition"
                 aria-label="تواصل عبر البريد"
               >
-                <span class="w-12 h-12 rounded-xl bg-primary-600/20 grid place-items-center">
-                  <svg viewBox="0 0 24 24" class="w-6 h-6"><path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.89 2 1.99 2H20a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5z"/></svg>
+                <span class="w-12 h-12 rounded-xl bg-primary-600/10 text-primary-700 grid place-items-center">
+                  <svg viewBox="0 0 24 24" class="w-6 h-6" aria-hidden="true"><path fill="currentColor" d="M3 6h18v12H3z"/><path fill="#fff" d="M3 6l9 6 9-6"/></svg>
                 </span>
                 <div>
-                  <p class="font-semibold">Email</p>
-                  <p class="text-sm text-white/70 font-english">contact@alaalab.com</p>
+                  <p class="font-semibold text-slate-900">Email</p>
+                  <p class="text-sm text-slate-600 font-english">contact@alaalab.com</p>
                 </div>
               </a>
               <button
                 onclick="copyEmail()"
-                class="absolute top-3 left-3 opacity-0 group-hover/email:opacity-100 transition-opacity p-2 rounded-lg bg-base-900 hover:bg-primary-600 focus-ring"
+                class="absolute top-3 left-3 w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 grid place-items-center transition-all focus-ring opacity-0 group-hover/email:opacity-100"
                 aria-label="نسخ البريد"
               >
-                <svg viewBox="0 0 24 24" class="w-4 h-4"><path fill="currentColor" d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1Zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2Zm0 16H8V7h11v14Z"/></svg>
+                <svg viewBox="0 0 24 24" class="w-4 h-4" aria-hidden="true"><path fill="currentColor" d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1z"/><path fill="currentColor" d="M19 5H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>
               </button>
             </div>
 
@@ -315,15 +329,15 @@
               href="https://instagram.com/alaamjaish"
               target="_blank"
               rel="noopener"
-              class="group flex flex-col items-center gap-3 rounded-2xl border border-white/10 bg-base-800 p-5 hover:border-white/30 transition text-center card-hover"
-              aria-label="تواصل انستجرام"
+              class="group flex flex-col items-center gap-3 rounded-2xl border border-slate-200 bg-white p-5 hover:bg-slate-50 transition text-center shadow-soft card-hover"
+              aria-label="انستغرام"
             >
-              <span class="w-12 h-12 rounded-xl bg-pink-600/20 grid place-items-center">
-                <svg viewBox="0 0 24 24" class="w-6 h-6"><path fill="currentColor" d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8A3.6 3.6 0 0 0 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6A3.6 3.6 0 0 0 16.4 4H7.6m9.65 1.5a1.25 1.25 0 1 1 0 2.5a1.25 1.25 0 0 1 0-2.5M12 7a5 5 0 1 1 0 10a5 5 0 0 1 0-10m0 2a3 3 0 1 0 0 6a3 3 0 0 0 0-6Z"/></svg>
+              <span class="w-12 h-12 rounded-xl bg-slate-100 text-slate-700 grid place-items-center">
+                <svg viewBox="0 0 24 24" class="w-6 h-6" aria-hidden="true"><path fill="currentColor" d="M7 5h10a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a4 4 0 0 1 4-4z"/><circle cx="12" cy="12" r="3.2" fill="#fff"/></svg>
               </span>
               <div>
-                <p class="font-semibold">Instagram</p>
-                <p class="text-sm text-white/70 font-english">@alaamjaish</p>
+                <p class="font-semibold text-slate-900">Instagram</p>
+                <p class="text-sm text-slate-600 font-english">@alaamjaish</p>
               </div>
             </a>
 
@@ -332,15 +346,15 @@
               href="https://youtube.com/@alaamjaish"
               target="_blank"
               rel="noopener"
-              class="group flex flex-col items-center gap-3 rounded-2xl border border-white/10 bg-base-800 p-5 hover:border-white/30 transition text-center card-hover"
+              class="group flex flex-col items-center gap-3 rounded-2xl border border-slate-200 bg-white p-5 hover:bg-slate-50 transition text-center shadow-soft card-hover"
               aria-label="يوتيوب"
             >
-              <span class="w-12 h-12 rounded-xl bg-white/10 grid place-items-center">
-                <svg viewBox="0 0 24 24" class="w-6 h-6"><path fill="currentColor" d="M10 15.5v-7l6 3.5l-6 3.5ZM21.58 7.2a3 3 0 0 0-2.12-2.12C17.88 4.68 12 4.68 12 4.68s-5.88 0-7.46.4A3 3 0 0 0 2.42 7.2A31 31 0 0 0 2 12a31 31 0 0 0 .42 4.8a3 3 0 0 0 2.12 2.12c1.58.4 7.46.4 7.46.4s5.88 0 7.46-.4a3 3 0 0 0 2.12-2.12A31 31 0 0 0 22 12a31 31 0 0 0-.42-4.8Z"/></svg>
+              <span class="w-12 h-12 rounded-xl bg-slate-100 text-slate-700 grid place-items-center">
+                <svg viewBox="0 0 24 24" class="w-6 h-6" aria-hidden="true"><path fill="currentColor" d="M21 7a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V7z"/><path fill="#fff" d="M10 15.5v-7l6 3.5z"/></svg>
               </span>
               <div>
-                <p class="font-semibold">YouTube</p>
-                <p class="text-sm text-white/70 font-english">@alaamjaish</p>
+                <p class="font-semibold text-slate-900">YouTube</p>
+                <p class="text-sm text-slate-600 font-english">@alaamjaish</p>
               </div>
             </a>
           </div>
@@ -350,17 +364,17 @@
   </main>
 
   <!-- Footer -->
-  <footer class="border-t border-white/10 py-8">
+  <footer class="border-t border-slate-200 bg-white py-8">
     <div class="container">
-      <div class="text-center text-sm text-white/50">
+      <div class="text-center text-sm text-slate-600">
         <p>&copy; 2025 Alaalab. جميع الحقوق محفوظة.</p>
       </div>
     </div>
   </footer>
 
   <!-- Toast Notification -->
-  <div id="toast" class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 bg-base-800 border border-white/20 px-6 py-3 rounded-xl shadow-soft z-50">
-    <p class="text-sm font-semibold">تم نسخ البريد الإلكتروني!</p>
+  <div id="toast" class="hidden fixed top-4 right-4 bg-accent-600 text-white px-5 py-3 rounded-xl shadow-soft font-semibold z-50 transition-opacity duration-300">
+    ✓ تم نسخ البريد الإلكتروني
   </div>
 
   <script>
@@ -447,8 +461,10 @@
     function showToast() {
       const toast = document.getElementById('toast');
       toast.classList.remove('hidden');
+      toast.style.opacity = '1';
       setTimeout(() => {
-        toast.classList.add('hidden');
+        toast.style.opacity = '0';
+        setTimeout(() => toast.classList.add('hidden'), 300);
       }, 2000);
     }
   </script>
