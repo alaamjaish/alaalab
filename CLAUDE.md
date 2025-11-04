@@ -6,6 +6,34 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a personal portfolio website for Alaa, showcasing AI solutions and consulting services. The site is built with pure HTML and Tailwind CSS (CDN), requiring no build process. It's designed for Arabic-speaking audiences with RTL (right-to-left) support and bilingual typography.
 
+## Project Structure
+
+```
+/ (root - only essential files for routing)
+├── index.html                 Main landing page (Arabic, RTL)
+├── downloads.html             Lead capture page
+├── english.html               English/LTR version
+├── vercel.json                Vercel configuration
+│
+├── .claude/                   Claude Code configuration (not in git)
+│
+├── assets/                    Organized assets
+│   └── images/
+│       ├── personalphoto.jpg
+│       └── projects/
+│           ├── transcriber1st.png, transcriber2ndphoto.png
+│           ├── scoutphoto1.png, scoutphoto2.png
+│           └── levanttalk1.png, levanttalk2.png
+│
+├── docs/                      Documentation
+│   ├── README.md
+│   ├── README_DEPLOY.md
+│   └── videoscript.md
+│
+└── archive/                   Legacy files
+    └── site3.html
+```
+
 ## Architecture
 
 ### Core Pages Structure
@@ -126,13 +154,14 @@ Search for contact strings globally before updating.
 
 ### Image Assets
 
-All images are in the root directory:
-- personalphoto.jpg (profile photo)
-- transcriber1st.png, transcriber2ndphoto.png
-- scoutphoto1.png, scoutphoto2.png
-- levanttalk1.png, levanttalk2.png
+All images are organized in the `assets/` folder:
+- **assets/images/personalphoto.jpg** - Profile photo
+- **assets/images/projects/** - Project screenshots:
+  - transcriber1st.png, transcriber2ndphoto.png
+  - scoutphoto1.png, scoutphoto2.png
+  - levanttalk1.png, levanttalk2.png
 
-All images referenced with relative paths - no subdirectories.
+Images are referenced with paths like `assets/images/personalphoto.jpg` or `assets/images/projects/projectname.png`.
 
 ## Deployment
 
