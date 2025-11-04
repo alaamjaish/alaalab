@@ -99,11 +99,11 @@
       </a>
 
       <div class="hidden md:flex items-center gap-6 text-sm">
-        <a href="#portfolio" class="text-slate-700 hover:text-slate-900">Portfolio</a>
-        <a href="#process" class="text-slate-700 hover:text-slate-900">How It Works</a>
-        <a href="#who" class="text-slate-700 hover:text-slate-900">Who I Help</a>
-        <a href="downloads.html" class="text-slate-700 hover:text-slate-900">Downloads</a>
-        <a href="#cta" class="px-4 py-2 rounded-xl bg-primary-600 text-white hover:bg-primary-700 transition focus-ring">Book Consultation</a>
+        <a href="#portfolio" data-scroll-to="portfolio" class="text-slate-700 hover:text-slate-900">Portfolio</a>
+        <a href="#process" data-scroll-to="process" class="text-slate-700 hover:text-slate-900">How It Works</a>
+        <a href="#who" data-scroll-to="who" class="text-slate-700 hover:text-slate-900">Who I Help</a>
+        <a href="/downloads" class="text-slate-700 hover:text-slate-900">Downloads</a>
+        <a href="#cta" data-scroll-to="cta" class="px-4 py-2 rounded-xl bg-primary-600 text-white hover:bg-primary-700 transition focus-ring">Book Consultation</a>
       </div>
     </nav>
   </header>
@@ -123,8 +123,8 @@
             </p>
 
             <div class="flex flex-wrap gap-3" data-stagger="80">
-              <a href="#portfolio" class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-primary-600 text-white hover:bg-primary-700 transition shadow-soft focus-ring">Explore My Work</a>
-              <a href="#contact" class="inline-flex items-center justify-center px-5 py-3 rounded-xl border border-slate-300 text-slate-800 hover:bg-slate-50 transition focus-ring">Contact Me</a>
+              <a href="#portfolio" data-scroll-to="portfolio" class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-primary-600 text-white hover:bg-primary-700 transition shadow-soft focus-ring">Explore My Work</a>
+              <a href="#contact" data-scroll-to="contact" class="inline-flex items-center justify-center px-5 py-3 rounded-xl border border-slate-300 text-slate-800 hover:bg-slate-50 transition focus-ring">Contact Me</a>
             </div>
 
             <div class="flex flex-wrap gap-2 pt-3" data-stagger="40">
@@ -610,6 +610,21 @@
       };
       window.addEventListener('scroll', onScroll, { passive: true });
       onScroll();
+    })();
+
+    // ==== Smooth scroll without URL hash (keeps URL clean)
+    (function() {
+      const scrollLinks = document.querySelectorAll('[data-scroll-to]');
+      scrollLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('data-scroll-to');
+          const targetSection = document.getElementById(targetId);
+          if (targetSection) {
+            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
     })();
   </script>
 </body>
