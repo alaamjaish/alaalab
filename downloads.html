@@ -421,22 +421,47 @@
       });
     });
 
-    // Form Submission
-    document.getElementById('downloadForm').addEventListener('submit', function(e) {
+    // Form Submission - ConvertKit Integration
+    document.getElementById('downloadForm').addEventListener('submit', async function(e) {
       e.preventDefault();
 
       const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
+      const submitButton = e.target.querySelector('button[type="submit"]');
 
-      // Here you would normally send this to your backend/email service
-      console.log('Form submitted:', { name, email });
+      // Disable button and show loading state
+      submitButton.disabled = true;
+      submitButton.textContent = 'جاري الإرسال...';
 
-      // Hide form, show success message
-      document.getElementById('downloadForm').classList.add('hidden');
-      document.getElementById('successMessage').classList.remove('hidden');
+      try {
+        // Send to our secure serverless function (no API key exposed!)
+        const response = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: email,
+            first_name: name
+          })
+        });
 
-      // Optional: Auto-download file here
-      // window.location.href = 'path/to/your/file.pdf';
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          // Success! Hide form, show success message
+          document.getElementById('downloadForm').classList.add('hidden');
+          document.getElementById('successMessage').classList.remove('hidden');
+        } else {
+          throw new Error(data.error || 'Subscription failed');
+        }
+      } catch (error) {
+        // Error handling
+        console.error('Error:', error);
+        alert('حدث خطأ في الإرسال. يرجى المحاولة مرة أخرى.');
+        submitButton.disabled = false;
+        submitButton.textContent = 'احصل على الملف المجاني';
+      }
     });
 
     // Consult Button - Show Contact Options
