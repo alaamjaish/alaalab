@@ -160,6 +160,44 @@
     .success-checkmark {
       animation: checkmark 0.5s ease forwards;
     }
+
+    /* Mobile Menu Styles */
+    .mobile-menu-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .mobile-menu-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .mobile-menu-content {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 85%;
+      max-width: 400px;
+      background: white;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      overflow-y: auto;
+    }
+
+    .mobile-menu-overlay.active .mobile-menu-content {
+      transform: translateX(0);
+    }
+
+    .mobile-menu-link {
+      -webkit-tap-highlight-color: transparent;
+    }
   </style>
 </head>
 <body>
@@ -170,9 +208,10 @@
         <span class="inline-grid place-items-center w-9 h-9 rounded-xl bg-gradient-to-br from-primary-600 to-accent-600 text-white shadow-soft">
           <span class="font-english font-bold text-sm">AL</span>
         </span>
-        <span class="font-bold text-slate-900">علاء لاب | لحلول الذكاء الاصطناعي</span>
+        <span class="font-bold text-slate-900 text-sm sm:text-base">علاء لاب | لحلول الذكاء الاصطناعي</span>
       </a>
 
+      <!-- Desktop Navigation -->
       <div class="hidden md:flex items-center gap-6 text-sm">
         <a href="/" class="text-slate-700 hover:text-slate-900">أعمالي</a>
         <a href="/" class="text-slate-700 hover:text-slate-900">آلية العمل</a>
@@ -180,8 +219,44 @@
         <a href="/downloads" class="text-slate-700 hover:text-slate-900 font-bold">التحميلات</a>
         <a href="/" class="px-4 py-2 rounded-xl bg-primary-600 text-white hover:bg-primary-700 transition focus-ring">احجز استشارة</a>
       </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobileMenuBtn"
+        class="md:hidden w-10 h-10 rounded-lg hover:bg-slate-100 grid place-items-center transition focus-ring"
+        aria-label="القائمة"
+      >
+        <svg class="w-6 h-6 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
     </nav>
   </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div id="mobileMenu" class="mobile-menu-overlay">
+    <div class="mobile-menu-content">
+      <!-- Close Button -->
+      <button
+        id="closeMobileMenu"
+        class="absolute top-4 left-4 w-10 h-10 rounded-lg hover:bg-slate-100 grid place-items-center transition focus-ring"
+        aria-label="إغلاق"
+      >
+        <svg class="w-6 h-6 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <!-- Mobile Navigation Links -->
+      <nav class="flex flex-col items-center justify-center gap-6 h-full">
+        <a href="/" class="mobile-menu-link text-2xl font-bold text-slate-900 hover:text-primary-600 transition">أعمالي</a>
+        <a href="/" class="mobile-menu-link text-2xl font-bold text-slate-900 hover:text-primary-600 transition">آلية العمل</a>
+        <a href="/" class="mobile-menu-link text-2xl font-bold text-slate-900 hover:text-primary-600 transition">لمن أساعد</a>
+        <a href="/downloads" class="mobile-menu-link text-2xl font-bold text-primary-600 transition">التحميلات</a>
+        <a href="/" class="mobile-menu-link px-8 py-4 rounded-xl bg-primary-600 text-white hover:bg-primary-700 transition shadow-soft text-xl font-bold">احجز استشارة</a>
+      </nav>
+    </div>
+  </div>
 
   <main>
     <!-- Hero Section -->
@@ -508,6 +583,49 @@
     document.addEventListener('DOMContentLoaded', () => {
       renderBooks();
     });
+
+    // ==== Mobile Menu
+    (function() {
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const closeMobileMenu = document.getElementById('closeMobileMenu');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+
+      function openMenu() {
+        mobileMenu.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMenu() {
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      // Open menu
+      mobileMenuBtn.addEventListener('click', openMenu);
+
+      // Close menu
+      closeMobileMenu.addEventListener('click', closeMenu);
+
+      // Close on overlay click
+      mobileMenu.addEventListener('click', (e) => {
+        if (e.target === mobileMenu) closeMenu();
+      });
+
+      // Close on link click
+      mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          closeMenu();
+        });
+      });
+
+      // Close on ESC key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+          closeMenu();
+        }
+      });
+    })();
   </script>
 </body>
 </html>
