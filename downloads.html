@@ -198,7 +198,7 @@
         </div>
 
         <!-- Books Gallery -->
-        <div id="booksGallery" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div id="booksGallery" class="grid md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
           <!-- Books will be dynamically inserted here -->
         </div>
       </div>
@@ -365,7 +365,7 @@
         card.setAttribute('data-reveal', 'up');
 
         card.innerHTML = `
-          <div class="aspect-[2/3] bg-slate-100 overflow-hidden">
+          <div class="aspect-[3/4] bg-slate-100 overflow-hidden">
             <img
               src="${book.cover}"
               alt="${book.title}"
@@ -373,10 +373,10 @@
             />
           </div>
           <div class="p-4">
-            <h3 class="text-base font-bold text-slate-900 mb-1.5 leading-tight">
+            <h3 class="text-base font-bold text-slate-900 mb-2 leading-tight">
               ${book.title}
             </h3>
-            <p class="text-slate-600 text-xs mb-3 leading-snug">
+            <p class="text-slate-600 text-xs mb-3 leading-relaxed">
               ${book.description || ''}
             </p>
             <button
