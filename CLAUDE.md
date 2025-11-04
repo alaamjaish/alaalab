@@ -11,21 +11,24 @@ This is a personal portfolio website for Alaa, showcasing AI solutions and consu
 ```
 / (root - only essential files for routing)
 ├── index.html                 Main landing page (Arabic, RTL)
-├── downloads.html             Lead capture page
+├── downloads.html             Lead capture page with ConvertKit integration
 ├── english.html               English/LTR version
 ├── vercel.json                Vercel configuration
 │
-├── .claude/                   Claude Code configuration (not in git)
+├── api/                       Vercel serverless functions
+│   └── subscribe.js           ConvertKit email subscription handler
 │
 ├── assets/                    Organized assets
+│   ├── downloads-data.js      Download resources configuration (Form IDs)
 │   └── images/
+│       ├── books/             Download resource cover images
 │       ├── personalphoto.jpg
-│       └── projects/
-│           ├── transcriber1st.png, transcriber2ndphoto.png
-│           ├── scoutphoto1.png, scoutphoto2.png
-│           └── levanttalk1.png, levanttalk2.png
+│       └── projects/          Portfolio project screenshots
+│
+├── files/                     Downloadable files (legacy, not used in production)
 │
 ├── docs/                      Documentation
+│   ├── Add-downloads-guide.md Step-by-step guide for adding new downloads
 │   ├── README.md
 │   ├── README_DEPLOY.md
 │   └── videoscript.md
@@ -53,12 +56,14 @@ The site consists of four main HTML files:
    - Multiple CTAs leading to consultation booking
    - Scroll-based reveal animations with IntersectionObserver
 
-2. **downloads.html** - Lead capture page (Arabic, RTL, light theme)
-   - Matches main site navigation and theme
-   - Simple form collecting name and email
-   - Success state that reveals after form submission
-   - "While you're here" CTA section driving to consultation
-   - Contact methods (WhatsApp, Email, Instagram, YouTube)
+2. **downloads.html** - Lead capture page with email-gated downloads (Arabic, RTL, light theme)
+   - Dynamic resource catalog loaded from `assets/downloads-data.js`
+   - Each resource card displays cover, title, description
+   - Modal popup for email capture (name + email required)
+   - Integrates with ConvertKit via `/api/subscribe` endpoint
+   - Each download linked to specific ConvertKit form (enables segmentation)
+   - Email confirmation flow (no direct downloads - files sent via ConvertKit incentive emails)
+   - "While you're here" CTA section with contact options
    - Same header as index.html for consistent navigation
 
 3. **english.html** - English/LTR version of main page
@@ -82,6 +87,48 @@ All pages use vanilla JavaScript embedded in `<script>` tags at the bottom of th
 - **Contact panel toggle**: Shows/hides WhatsApp, email, social media options
 - **Form handling**: Client-side validation and success state management (downloads.html)
 - **Reduced motion support**: Respects `prefers-reduced-motion: reduce` media query
+
+#### Downloads Page Specific Functions:
+
+- **`renderBooks()`**: Dynamically generates resource cards from `booksData` array
+- **`openDownloadModal(formId, resourceTitle)`**: Opens email capture modal for specific resource
+- **`closeDownloadModal()`**: Closes modal and resets form state
+- **Form submission**: Sends `{email, first_name, form_id}` to `/api/subscribe` via fetch
+
+### Serverless API (`api/subscribe.js`)
+
+Vercel serverless function that securely handles ConvertKit subscriptions.
+
+**Endpoint:** `POST /api/subscribe`
+
+**Request Body:**
+```json
+{
+  "email": "user@example.com",
+  "first_name": "User Name",
+  "form_id": "8737582"
+}
+```
+
+**Response (Success):**
+```json
+{
+  "success": true,
+  "message": "Subscription successful"
+}
+```
+
+**Response (Error):**
+```json
+{
+  "error": "Error message"
+}
+```
+
+**Environment Variables Required:**
+- `CONVERTKIT_API_KEY` - Must be set in Vercel dashboard under Project Settings → Environment Variables
+
+**Important:** The function accepts `form_id` dynamically from the client, allowing each download resource to use its own ConvertKit form without code changes. Never hardcode Form IDs in this function.
 
 ### Styling Architecture
 
@@ -156,12 +203,31 @@ Search for contact strings globally before updating.
 
 All images are organized in the `assets/` folder:
 - **assets/images/personalphoto.jpg** - Profile photo
-- **assets/images/projects/** - Project screenshots:
+- **assets/images/projects/** - Portfolio project screenshots:
   - transcriber1st.png, transcriber2ndphoto.png
   - scoutphoto1.png, scoutphoto2.png
   - levanttalk1.png, levanttalk2.png
+- **assets/images/books/** - Download resource cover images (3:4 aspect ratio recommended)
 
 Images are referenced with paths like `assets/images/personalphoto.jpg` or `assets/images/projects/projectname.png`.
+
+### Downloads Data Configuration
+
+**File:** `assets/downloads-data.js`
+
+This JavaScript file contains an array of downloadable resource objects. Each object structure:
+
+```javascript
+{
+  id: 1,                                    // Unique numeric ID
+  title: "عنوان المورد",                    // Resource title (Arabic)
+  cover: "assets/images/books/cover.png",  // Path to cover image
+  convertkitFormId: "8737582",             // ConvertKit Form ID (string)
+  description: "وصف قصير للمورد"            // Brief description
+}
+```
+
+**Critical:** Each resource MUST have its own unique ConvertKit form with an incentive configured. Do not reuse Form IDs across resources - this breaks segmentation tracking.
 
 ## Deployment
 
@@ -202,12 +268,37 @@ No build commands required - pure static files.
 5. Test on mobile devices (responsive design)
 6. Verify RTL/LTR layouts render correctly
 
-### Post-Deployment Tasks
+### ConvertKit Integration & Lead Magnet System
 
-The downloads.html form integrates with ConvertKit via Vercel serverless functions:
-- Email capture handled by `/api/subscribe` endpoint
-- ConvertKit API key stored in Vercel environment variables
-- Each resource can have its own ConvertKit form with incentive delivery
+**Critical Architecture:** The downloads system uses a serverless function pattern to keep API keys secure while enabling per-resource segmentation.
+
+**Data Flow:**
+1. User clicks download → `downloads.html` opens modal
+2. User submits email → JavaScript sends `{email, first_name, form_id}` to `/api/subscribe`
+3. Serverless function validates and forwards to ConvertKit API: `POST /v3/forms/{form_id}/subscribe`
+4. ConvertKit sends incentive email with download link
+5. ConvertKit tracks subscription per form (enables audience segmentation)
+
+**Key Files:**
+- `api/subscribe.js` - Vercel serverless function that proxies to ConvertKit API
+- `assets/downloads-data.js` - Resource catalog with ConvertKit Form IDs
+- `downloads.html` - Frontend that dynamically renders cards and handles form submission
+
+**Environment Variables (Vercel Dashboard):**
+- `CONVERTKIT_API_KEY` - Your ConvertKit API key (REQUIRED)
+
+**Important:** Form IDs are NOT stored in environment variables. They live in `assets/downloads-data.js` as part of each resource object. This allows adding new downloads without touching Vercel configuration.
+
+### Adding New Download Resources
+
+See `docs/Add-downloads-guide.md` for step-by-step instructions. Summary:
+1. Create ConvertKit form with incentive (PDF upload)
+2. Copy Form ID from URL
+3. Add cover image to `assets/images/books/`
+4. Add resource object to `assets/downloads-data.js` with the Form ID
+5. Push to git - Vercel auto-deploys
+
+No Vercel configuration changes needed when adding new resources.
 
 ## Browser Support
 
