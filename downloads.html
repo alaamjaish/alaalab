@@ -395,9 +395,22 @@
       initRevealAnimations();
     }
 
+    // Check if user already submitted email
+    function hasUserSubmittedEmail() {
+      return localStorage.getItem('userSubmittedEmail') === 'true';
+    }
+
     // Modal Functions
     function openDownloadModal(fileUrl) {
       currentDownloadFile = fileUrl;
+
+      // If user already submitted email before, just download directly!
+      if (hasUserSubmittedEmail()) {
+        triggerDownload(fileUrl);
+        return;
+      }
+
+      // Otherwise, show the modal
       const modal = document.getElementById('downloadModal');
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
@@ -446,6 +459,9 @@
         const data = await response.json();
 
         if (response.ok && data.success) {
+          // Save to localStorage so they don't need to enter email again
+          localStorage.setItem('userSubmittedEmail', 'true');
+
           // Success! Start download
           triggerDownload(currentDownloadFile);
 
