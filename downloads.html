@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>التحميل المجاني - Alaalab</title>
+  <title>التحميلات المجانية - Alaalab</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -80,6 +80,62 @@
       outline-offset: 2px;
     }
 
+    /* Book Card Hover */
+    .book-card {
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .book-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(2,8,23,0.15);
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 24px;
+      max-width: 500px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: scale(0.9) translateY(20px);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: scale(1) translateY(0);
+    }
+
+    /* Form Styles */
+    input {
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #0284C7;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1);
+    }
+
     /* Scroll Reveal Animations */
     [data-reveal] {
       opacity: 0;
@@ -90,57 +146,19 @@
       transform: translateY(30px);
     }
 
-    [data-reveal="down"] {
-      transform: translateY(-30px);
-    }
-
-    [data-reveal="left"] {
-      transform: translateX(30px);
-    }
-
-    [data-reveal="right"] {
-      transform: translateX(-30px);
-    }
-
     [data-reveal="fade"] {
       transform: none;
     }
 
-    /* Card Hover */
-    .card-hover {
-      transition: transform .25s ease, box-shadow .25s ease;
+    /* Success Animation */
+    @keyframes checkmark {
+      0% { transform: scale(0) rotate(45deg); }
+      50% { transform: scale(1.2) rotate(45deg); }
+      100% { transform: scale(1) rotate(45deg); }
     }
 
-    .card-hover:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(2,8,23,0.10);
-    }
-
-    /* Form Styles */
-    input, textarea {
-      transition: all 0.3s ease;
-    }
-
-    input:focus, textarea:focus {
-      outline: none;
-      border-color: #0284C7;
-      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1);
-    }
-
-    /* Success Message Animation */
-    @keyframes slideDown {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .success-message {
-      animation: slideDown 0.5s ease;
+    .success-checkmark {
+      animation: checkmark 0.5s ease forwards;
     }
   </style>
 </head>
@@ -166,198 +184,44 @@
   </header>
 
   <main>
-    <!-- Hero Section - Download Form -->
-    <section class="py-20 lg:py-32 bg-slate-50">
-      <div class="container max-w-2xl">
-        <div class="text-center mb-12" data-reveal="up">
-          <p class="text-sm uppercase tracking-wider text-primary-600 font-english mb-3">Free Resource</p>
-          <h1 class="text-3xl lg:text-5xl font-extrabold text-slate-900 mb-6">
-            حمّل دليل الأدوات المجاني
+    <!-- Hero Section -->
+    <section class="py-16 lg:py-24 bg-gradient-to-b from-slate-50 to-white">
+      <div class="container max-w-6xl">
+        <div class="text-center mb-16" data-reveal="up">
+          <p class="text-sm uppercase tracking-wider text-primary-600 font-english mb-3">Free Resources</p>
+          <h1 class="text-4xl lg:text-6xl font-extrabold text-slate-900 mb-6">
+            مكتبة الموارد المجانية
           </h1>
-          <p class="text-lg lg:text-xl text-slate-700 leading-relaxed">
-            أدخل بريدك الإلكتروني وسنرسل لك الملف مباشرة
+          <p class="text-lg lg:text-xl text-slate-700 leading-relaxed max-w-2xl mx-auto">
+            أدلة وملفات مجانية لمساعدتك في رحلتك مع الذكاء الاصطناعي
           </p>
         </div>
 
-        <!-- Form Card -->
-        <div
-          id="formCard"
-          class="rounded-3xl border border-slate-200 bg-white p-8 lg:p-12 shadow-soft"
-          data-reveal="up"
-          data-delay="100"
-        >
-          <form id="downloadForm" class="space-y-6">
-            <!-- Name Field -->
-            <div>
-              <label for="name" class="block text-sm font-semibold text-slate-900 mb-2">
-                الاسم
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                required
-                class="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 text-slate-900 placeholder-slate-400 focus-ring"
-                placeholder="أدخل اسمك الكامل"
-              />
-            </div>
-
-            <!-- Email Field -->
-            <div>
-              <label for="email" class="block text-sm font-semibold text-slate-900 mb-2">
-                البريد الإلكتروني
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                class="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 text-slate-900 placeholder-slate-400 focus-ring font-english"
-                placeholder="your@email.com"
-              />
-            </div>
-
-            <!-- Submit Button -->
-            <button
-              type="submit"
-              class="w-full px-6 py-4 rounded-xl bg-primary-600 hover:bg-primary-700 text-white transition font-bold text-lg shadow-soft focus-ring"
-            >
-              احصل على الملف المجاني
-            </button>
-
-            <p class="text-xs text-slate-600 text-center">
-              لن نرسل لك أي رسائل مزعجة. فقط الملف المجاني والمحتوى القيّم.
-            </p>
-          </form>
-
-          <!-- Success Message (Hidden by default) -->
-          <div id="successMessage" class="hidden success-message">
-            <div class="text-center py-6">
-              <div class="w-16 h-16 rounded-full bg-accent-100 grid place-items-center mx-auto mb-4">
-                <svg viewBox="0 0 24 24" class="w-8 h-8 text-accent-600" fill="currentColor">
-                  <path d="M9.55 17.54 4.8 12.8l1.41-1.41 3.34 3.33 7.24-7.24 1.41 1.41z"/>
-                </svg>
-              </div>
-              <h3 class="text-2xl font-bold text-slate-900 mb-2">تم الإرسال بنجاح!</h3>
-              <p class="text-slate-700">تحقق من بريدك الإلكتروني - الملف في الطريق إليك الآن.</p>
-            </div>
-          </div>
+        <!-- Books Gallery -->
+        <div id="booksGallery" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Books will be dynamically inserted here -->
         </div>
       </div>
     </section>
 
-    <!-- While You're Here Section -->
-    <section id="whileHere" class="py-16 lg:py-24 bg-white border-y border-slate-200">
+    <!-- CTA Section -->
+    <section class="py-16 lg:py-24 bg-white border-y border-slate-200">
       <div class="container max-w-4xl">
-        <div class="text-center mb-12" data-reveal="up">
-          <h2 class="text-3xl lg:text-4xl font-extrabold text-slate-900 mb-4">
-            بينما أنت هنا...
+        <div class="text-center" data-reveal="up">
+          <h2 class="text-3xl lg:text-4xl font-extrabold text-slate-900 mb-6">
+            هل تريد المزيد؟
           </h2>
-        </div>
-
-        <div class="space-y-8" data-reveal="up" data-delay="100">
-          <p class="text-lg text-slate-700 leading-relaxed text-center">
-            أنا علاء، أبني حلول ذكاء اصطناعي مخصصة للشركات والمحترفين في العالم العربي.
+          <p class="text-lg text-slate-700 mb-8 leading-relaxed">
+            احجز استشارة مجانية معي لنناقش كيف يمكن للذكاء الاصطناعي أن يحول عملك
           </p>
-          <p class="text-lg text-slate-700 leading-relaxed text-center">
-            إذا كنت تواجه مشاكل في سير عملك وتريد حلاً عملياً - ليس فقط معلومات - أنا هنا لمساعدتك.
-          </p>
-
-          <!-- CTA Buttons -->
-          <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
-            <button
-              id="consultButton"
-              class="px-8 py-4 rounded-xl bg-primary-600 hover:bg-primary-700 text-white transition font-bold shadow-soft focus-ring"
-            >
-              احجز استشارة مجانية معي
-            </button>
-            <a
-              href="/"
-              class="px-8 py-4 rounded-xl border border-slate-300 text-slate-800 hover:bg-slate-50 transition font-semibold focus-ring"
-            >
-              أو تعرّف أكثر على خدماتي
-            </a>
-          </div>
-        </div>
-
-        <!-- Contact Options (Hidden by default, shown on button click) -->
-        <div id="contactOptions" class="hidden mt-12">
-          <div class="grid sm:grid-cols-2 gap-4" data-stagger="60">
-            <!-- WhatsApp -->
-            <a
-              href="https://wa.me/905340718990"
-              target="_blank"
-              rel="noopener"
-              class="group flex flex-col items-center gap-3 rounded-2xl border border-slate-200 bg-white p-5 hover:bg-slate-50 transition text-center shadow-soft card-hover"
-              aria-label="تواصل واتساب"
-            >
-              <span class="w-12 h-12 rounded-xl bg-accent-600/10 text-accent-700 grid place-items-center">
-                <svg viewBox="0 0 24 24" class="w-6 h-6" aria-hidden="true"><path fill="currentColor" d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg>
-              </span>
-              <div>
-                <p class="font-semibold text-slate-900">واتساب</p>
-                <p class="text-sm text-slate-600 font-english">+90 534 071 8990</p>
-              </div>
-            </a>
-
-            <!-- Email -->
-            <div class="group/email relative rounded-2xl border border-slate-200 bg-white p-5 text-center hover:bg-slate-50 transition shadow-soft card-hover">
-              <a
-                href="mailto:contact@alaalab.com"
-                class="flex flex-col items-center gap-3 hover:opacity-80 transition"
-                aria-label="تواصل عبر البريد"
-              >
-                <span class="w-12 h-12 rounded-xl bg-primary-600/10 text-primary-700 grid place-items-center">
-                  <svg viewBox="0 0 24 24" class="w-6 h-6" aria-hidden="true"><path fill="currentColor" d="M3 6h18v12H3z"/><path fill="#fff" d="M3 6l9 6 9-6"/></svg>
-                </span>
-                <div>
-                  <p class="font-semibold text-slate-900">Email</p>
-                  <p class="text-sm text-slate-600 font-english">contact@alaalab.com</p>
-                </div>
-              </a>
-              <button
-                onclick="copyEmail()"
-                class="absolute top-3 left-3 w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 grid place-items-center transition-all focus-ring opacity-0 group-hover/email:opacity-100"
-                aria-label="نسخ البريد"
-              >
-                <svg viewBox="0 0 24 24" class="w-4 h-4" aria-hidden="true"><path fill="currentColor" d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1z"/><path fill="currentColor" d="M19 5H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>
-              </button>
-            </div>
-
-            <!-- Instagram -->
-            <a
-              href="https://instagram.com/alaamjaish"
-              target="_blank"
-              rel="noopener"
-              class="group flex flex-col items-center gap-3 rounded-2xl border border-slate-200 bg-white p-5 hover:bg-slate-50 transition text-center shadow-soft card-hover"
-              aria-label="انستغرام"
-            >
-              <span class="w-12 h-12 rounded-xl bg-slate-100 text-slate-700 grid place-items-center">
-                <svg viewBox="0 0 24 24" class="w-6 h-6" aria-hidden="true"><path fill="currentColor" d="M7 5h10a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a4 4 0 0 1 4-4z"/><circle cx="12" cy="12" r="3.2" fill="#fff"/></svg>
-              </span>
-              <div>
-                <p class="font-semibold text-slate-900">Instagram</p>
-                <p class="text-sm text-slate-600 font-english">@alaamjaish</p>
-              </div>
-            </a>
-
-            <!-- YouTube -->
-            <a
-              href="https://youtube.com/@alaamjaish"
-              target="_blank"
-              rel="noopener"
-              class="group flex flex-col items-center gap-3 rounded-2xl border border-slate-200 bg-white p-5 hover:bg-slate-50 transition text-center shadow-soft card-hover"
-              aria-label="يوتيوب"
-            >
-              <span class="w-12 h-12 rounded-xl bg-slate-100 text-slate-700 grid place-items-center">
-                <svg viewBox="0 0 24 24" class="w-6 h-6" aria-hidden="true"><path fill="currentColor" d="M21 7a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V7z"/><path fill="#fff" d="M10 15.5v-7l6 3.5z"/></svg>
-              </span>
-              <div>
-                <p class="font-semibold text-slate-900">YouTube</p>
-                <p class="text-sm text-slate-600 font-english">@alaamjaish</p>
-              </div>
-            </a>
-          </div>
+          <a
+            href="https://wa.me/905340718990"
+            target="_blank"
+            rel="noopener"
+            class="inline-flex px-8 py-4 rounded-xl bg-primary-600 hover:bg-primary-700 text-white transition font-bold shadow-soft focus-ring"
+          >
+            احجز استشارة مجانية
+          </a>
         </div>
       </div>
     </section>
@@ -372,69 +236,186 @@
     </div>
   </footer>
 
-  <!-- Toast Notification -->
-  <div id="toast" class="hidden fixed top-4 right-4 bg-accent-600 text-white px-5 py-3 rounded-xl shadow-soft font-semibold z-50 transition-opacity duration-300">
-    ✓ تم نسخ البريد الإلكتروني
+  <!-- Download Modal -->
+  <div id="downloadModal" class="modal-overlay">
+    <div class="modal-content p-8 lg:p-10">
+      <!-- Close Button -->
+      <button
+        id="closeModal"
+        class="absolute top-4 left-4 w-10 h-10 rounded-full hover:bg-slate-100 grid place-items-center transition focus-ring"
+        aria-label="إغلاق"
+      >
+        <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <!-- Form View -->
+      <div id="formView">
+        <div class="text-center mb-8">
+          <div class="w-16 h-16 rounded-full bg-primary-100 grid place-items-center mx-auto mb-4">
+            <svg viewBox="0 0 24 24" class="w-8 h-8 text-primary-600" fill="currentColor">
+              <path d="M13 2v6h3l-4 5-4-5h3V2z"/>
+              <path d="M19 13v6H5v-6H3v8h18v-8z"/>
+            </svg>
+          </div>
+          <h2 class="text-2xl lg:text-3xl font-extrabold text-slate-900 mb-2">
+            احصل على التحميل المجاني
+          </h2>
+          <p class="text-slate-700">
+            أدخل بريدك الإلكتروني وسيبدأ التحميل فوراً
+          </p>
+        </div>
+
+        <form id="downloadForm" class="space-y-5">
+          <!-- Name Field -->
+          <div>
+            <label for="userName" class="block text-sm font-semibold text-slate-900 mb-2">
+              الاسم
+            </label>
+            <input
+              type="text"
+              id="userName"
+              name="name"
+              required
+              class="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 text-slate-900 placeholder-slate-400 focus-ring"
+              placeholder="أدخل اسمك الكامل"
+            />
+          </div>
+
+          <!-- Email Field -->
+          <div>
+            <label for="userEmail" class="block text-sm font-semibold text-slate-900 mb-2">
+              البريد الإلكتروني
+            </label>
+            <input
+              type="email"
+              id="userEmail"
+              name="email"
+              required
+              class="w-full px-4 py-3 rounded-xl bg-white border border-slate-300 text-slate-900 placeholder-slate-400 focus-ring font-english"
+              placeholder="your@email.com"
+            />
+          </div>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            id="submitBtn"
+            class="w-full px-6 py-4 rounded-xl bg-primary-600 hover:bg-primary-700 text-white transition font-bold text-lg shadow-soft focus-ring"
+          >
+            تحميل الآن
+          </button>
+
+          <p class="text-xs text-slate-600 text-center">
+            لن نرسل لك أي رسائل مزعجة. فقط محتوى قيّم.
+          </p>
+        </form>
+      </div>
+
+      <!-- Success View (Hidden by default) -->
+      <div id="successView" class="hidden text-center py-6">
+        <div class="w-20 h-20 rounded-full bg-accent-100 grid place-items-center mx-auto mb-6">
+          <svg viewBox="0 0 24 24" class="w-10 h-10 text-accent-600 success-checkmark" fill="currentColor">
+            <path d="M9.55 17.54 4.8 12.8l1.41-1.41 3.34 3.33 7.24-7.24 1.41 1.41z"/>
+          </svg>
+        </div>
+        <h3 class="text-2xl font-bold text-slate-900 mb-3">تم بنجاح!</h3>
+        <p class="text-lg text-slate-700 mb-6">التحميل قد بدأ... تحقق من مجلد التحميلات</p>
+        <button
+          id="closeSuccessBtn"
+          class="px-6 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-900 transition font-semibold focus-ring"
+        >
+          إغلاق
+        </button>
+      </div>
+    </div>
   </div>
 
+  <!-- Load Books Data -->
+  <script src="assets/downloads-data.js"></script>
+
   <script>
-    // Scroll Reveal Animation
-    const baseTransition = 'opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1)';
+    // Global variables
+    let currentDownloadFile = '';
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const revealElements = document.querySelectorAll('[data-reveal]');
+    // Generate book cards from data
+    function renderBooks() {
+      const gallery = document.getElementById('booksGallery');
 
-      revealElements.forEach(el => {
-        el.style.transition = baseTransition;
-        const delay = el.getAttribute('data-delay');
-        if (delay) {
-          el.style.transitionDelay = `${delay}ms`;
-        }
+      booksData.forEach(book => {
+        const card = document.createElement('div');
+        card.className = 'book-card bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-soft';
+        card.setAttribute('data-reveal', 'up');
+
+        card.innerHTML = `
+          <div class="aspect-[3/4] bg-slate-100 overflow-hidden">
+            <img
+              src="${book.cover}"
+              alt="${book.title}"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-slate-900 mb-2 leading-tight">
+              ${book.title}
+            </h3>
+            <p class="text-slate-600 text-sm mb-4 leading-relaxed">
+              ${book.description || ''}
+            </p>
+            <button
+              onclick="openDownloadModal('${book.file}')"
+              class="w-full px-6 py-3 rounded-xl bg-primary-600 hover:bg-primary-700 text-white transition font-bold focus-ring"
+            >
+              تحميل مجاني
+            </button>
+          </div>
+        `;
+
+        gallery.appendChild(card);
       });
 
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'none';
-            io.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.16 });
+      // Trigger reveal animations
+      initRevealAnimations();
+    }
 
-      revealElements.forEach(el => io.observe(el));
+    // Modal Functions
+    function openDownloadModal(fileUrl) {
+      currentDownloadFile = fileUrl;
+      const modal = document.getElementById('downloadModal');
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
 
-      // Stagger Animation
-      const staggerContainers = document.querySelectorAll('[data-stagger]');
-      staggerContainers.forEach(container => {
-        const staggerDelay = parseInt(container.getAttribute('data-stagger')) || 100;
-        const children = container.children;
-        Array.from(children).forEach((child, i) => {
-          child.setAttribute('data-reveal', 'up');
-          child.style.transition = baseTransition;
-          child.style.transitionDelay = `${i * staggerDelay}ms`;
-          child.style.opacity = '0';
-          child.style.transform = 'translateY(30px)';
+    function closeDownloadModal() {
+      const modal = document.getElementById('downloadModal');
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
 
-          io.observe(child);
-        });
-      });
-    });
+      // Reset form and views after animation
+      setTimeout(() => {
+        document.getElementById('formView').classList.remove('hidden');
+        document.getElementById('successView').classList.add('hidden');
+        document.getElementById('downloadForm').reset();
+        document.getElementById('submitBtn').disabled = false;
+        document.getElementById('submitBtn').textContent = 'تحميل الآن';
+      }, 300);
+    }
 
-    // Form Submission - ConvertKit Integration
+    // Form Submission Handler
     document.getElementById('downloadForm').addEventListener('submit', async function(e) {
       e.preventDefault();
 
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const submitButton = e.target.querySelector('button[type="submit"]');
+      const name = document.getElementById('userName').value;
+      const email = document.getElementById('userEmail').value;
+      const submitBtn = document.getElementById('submitBtn');
 
-      // Disable button and show loading state
-      submitButton.disabled = true;
-      submitButton.textContent = 'جاري الإرسال...';
+      // Disable button and show loading
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'جاري المعالجة...';
 
       try {
-        // Send to our secure serverless function (no API key exposed!)
+        // Send email to ConvertKit via secure API
         const response = await fetch('/api/subscribe', {
           method: 'POST',
           headers: {
@@ -449,49 +430,76 @@
         const data = await response.json();
 
         if (response.ok && data.success) {
-          // Success! Hide form, show success message
-          document.getElementById('downloadForm').classList.add('hidden');
-          document.getElementById('successMessage').classList.remove('hidden');
+          // Success! Start download
+          triggerDownload(currentDownloadFile);
+
+          // Show success message
+          document.getElementById('formView').classList.add('hidden');
+          document.getElementById('successView').classList.remove('hidden');
         } else {
-          throw new Error(data.error || 'Subscription failed');
+          throw new Error(data.error || 'حدث خطأ');
         }
       } catch (error) {
-        // Error handling
         console.error('Error:', error);
         alert('حدث خطأ في الإرسال. يرجى المحاولة مرة أخرى.');
-        submitButton.disabled = false;
-        submitButton.textContent = 'احصل على الملف المجاني';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'تحميل الآن';
       }
     });
 
-    // Consult Button - Show Contact Options
-    document.getElementById('consultButton').addEventListener('click', function() {
-      const contactOptions = document.getElementById('contactOptions');
-      contactOptions.classList.toggle('hidden');
+    // Trigger File Download
+    function triggerDownload(fileUrl) {
+      const link = document.createElement('a');
+      link.href = fileUrl;
+      link.download = fileUrl.split('/').pop(); // Extract filename
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
 
-      if (!contactOptions.classList.contains('hidden')) {
-        contactOptions.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    // Close Modal Handlers
+    document.getElementById('closeModal').addEventListener('click', closeDownloadModal);
+    document.getElementById('closeSuccessBtn').addEventListener('click', closeDownloadModal);
+
+    // Close on overlay click
+    document.getElementById('downloadModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeDownloadModal();
       }
     });
 
-    // Copy Email Function
-    function copyEmail() {
-      const email = 'contact@alaalab.com';
-      navigator.clipboard.writeText(email).then(() => {
-        showToast();
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeDownloadModal();
+      }
+    });
+
+    // Scroll Reveal Animation
+    function initRevealAnimations() {
+      const revealElements = document.querySelectorAll('[data-reveal]');
+
+      revealElements.forEach(el => {
+        el.style.transition = 'opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1)';
       });
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'none';
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.16 });
+
+      revealElements.forEach(el => io.observe(el));
     }
 
-    // Toast Notification
-    function showToast() {
-      const toast = document.getElementById('toast');
-      toast.classList.remove('hidden');
-      toast.style.opacity = '1';
-      setTimeout(() => {
-        toast.style.opacity = '0';
-        setTimeout(() => toast.classList.add('hidden'), 300);
-      }, 2000);
-    }
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', () => {
+      renderBooks();
+    });
   </script>
 </body>
 </html>
