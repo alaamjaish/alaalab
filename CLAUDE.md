@@ -165,12 +165,12 @@ Images are referenced with paths like `assets/images/personalphoto.jpg` or `asse
 
 ## Deployment
 
-### Git and Netlify Workflow
+### Git and Vercel Workflow
 
-This site uses continuous deployment via Netlify:
+This site uses continuous deployment via Vercel:
 1. Push changes to git repository (GitHub)
-2. Netlify automatically detects the push
-3. Netlify rebuilds and deploys the site (30-60 seconds)
+2. Vercel automatically detects the push
+3. Vercel rebuilds and deploys the site (30-60 seconds)
 4. No build commands needed - pure static files
 
 **Git Commands:**
@@ -187,8 +187,8 @@ git push origin main
 ### Static Hosting (Alternatives)
 
 This site is deployment-ready for any static host:
-- **Netlify**: Git-based continuous deployment (recommended, currently in use)
-- **Vercel**: Drag/drop folder or git deploy
+- **Vercel**: Git-based continuous deployment (recommended, currently in use)
+- **Netlify**: Drag/drop folder or git deploy
 - **Traditional hosting**: Upload all files to public_html/www root
 
 No build commands required - pure static files.
@@ -204,10 +204,10 @@ No build commands required - pure static files.
 
 ### Post-Deployment Tasks
 
-The form in downloads.html currently only shows success message client-side. To actually capture leads:
-- Option 1: Connect to form service (Formspree, FormSubmit, Basin)
-- Option 2: Integrate with email marketing (ConvertKit, Mailchimp)
-- Option 3: Use serverless function (Vercel/Netlify Functions)
+The downloads.html form integrates with ConvertKit via Vercel serverless functions:
+- Email capture handled by `/api/subscribe` endpoint
+- ConvertKit API key stored in Vercel environment variables
+- Each resource can have its own ConvertKit form with incentive delivery
 
 ## Browser Support
 

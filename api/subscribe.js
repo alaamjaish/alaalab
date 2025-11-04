@@ -8,27 +8,26 @@ export default async function handler(req, res) {
   }
 
   // Get form data from request
-  const { email, first_name } = req.body;
+  const { email, first_name, form_id } = req.body;
 
   // Validate required fields
-  if (!email || !first_name) {
-    return res.status(400).json({ error: 'Email and name are required' });
+  if (!email || !first_name || !form_id) {
+    return res.status(400).json({ error: 'Email, name, and form ID are required' });
   }
 
   // ConvertKit API configuration (from environment variables)
   const CONVERTKIT_API_KEY = process.env.CONVERTKIT_API_KEY;
-  const CONVERTKIT_FORM_ID = process.env.CONVERTKIT_FORM_ID;
 
-  // Check if environment variables are set
-  if (!CONVERTKIT_API_KEY || !CONVERTKIT_FORM_ID) {
-    console.error('Missing environment variables');
+  // Check if environment variable is set
+  if (!CONVERTKIT_API_KEY) {
+    console.error('Missing CONVERTKIT_API_KEY environment variable');
     return res.status(500).json({ error: 'Server configuration error' });
   }
 
   try {
-    // Send to ConvertKit API
+    // Send to ConvertKit API using dynamic form_id
     const response = await fetch(
-      `https://api.convertkit.com/v3/forms/${CONVERTKIT_FORM_ID}/subscribe`,
+      `https://api.convertkit.com/v3/forms/${form_id}/subscribe`,
       {
         method: 'POST',
         headers: {
