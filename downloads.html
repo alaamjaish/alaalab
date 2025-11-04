@@ -204,24 +204,40 @@
       </div>
     </section>
 
-    <!-- CTA Section -->
+    <!-- While You're Here Section -->
     <section class="py-16 lg:py-24 bg-white border-y border-slate-200">
       <div class="container max-w-4xl">
-        <div class="text-center" data-reveal="up">
-          <h2 class="text-3xl lg:text-4xl font-extrabold text-slate-900 mb-6">
-            هل تريد المزيد؟
+        <div class="text-center mb-12" data-reveal="up">
+          <h2 class="text-3xl lg:text-4xl font-extrabold text-slate-900 mb-4">
+            بينما أنت هنا...
           </h2>
-          <p class="text-lg text-slate-700 mb-8 leading-relaxed">
-            احجز استشارة مجانية معي لنناقش كيف يمكن للذكاء الاصطناعي أن يحول عملك
+        </div>
+
+        <div class="space-y-8" data-reveal="up">
+          <p class="text-lg text-slate-700 leading-relaxed text-center">
+            أنا علاء، أبني حلول ذكاء اصطناعي مخصصة للشركات والمحترفين في العالم العربي.
           </p>
-          <a
-            href="https://wa.me/905340718990"
-            target="_blank"
-            rel="noopener"
-            class="inline-flex px-8 py-4 rounded-xl bg-primary-600 hover:bg-primary-700 text-white transition font-bold shadow-soft focus-ring"
-          >
-            احجز استشارة مجانية
-          </a>
+          <p class="text-lg text-slate-700 leading-relaxed text-center">
+            إذا كنت تواجه مشاكل في سير عملك وتريد حلاً عملياً - ليس فقط معلومات - أنا هنا لمساعدتك.
+          </p>
+
+          <!-- CTA Buttons -->
+          <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
+            <a
+              href="https://wa.me/905340718990"
+              target="_blank"
+              rel="noopener"
+              class="px-8 py-4 rounded-xl bg-primary-600 hover:bg-primary-700 text-white transition font-bold shadow-soft focus-ring"
+            >
+              احجز استشارة مجانية معي
+            </a>
+            <a
+              href="/"
+              class="px-8 py-4 rounded-xl border border-slate-300 text-slate-800 hover:bg-slate-50 transition font-semibold focus-ring"
+            >
+              أو تعرّف أكثر على خدماتي
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -349,23 +365,23 @@
         card.setAttribute('data-reveal', 'up');
 
         card.innerHTML = `
-          <div class="aspect-[3/4] bg-slate-100 overflow-hidden">
+          <div class="aspect-[2/3] bg-slate-100 overflow-hidden">
             <img
               src="${book.cover}"
               alt="${book.title}"
               class="w-full h-full object-contain"
             />
           </div>
-          <div class="p-5">
-            <h3 class="text-lg font-bold text-slate-900 mb-2 leading-tight">
+          <div class="p-4">
+            <h3 class="text-base font-bold text-slate-900 mb-1.5 leading-tight">
               ${book.title}
             </h3>
-            <p class="text-slate-600 text-xs mb-4 leading-relaxed">
+            <p class="text-slate-600 text-xs mb-3 leading-snug">
               ${book.description || ''}
             </p>
             <button
               onclick="openDownloadModal('${book.file}')"
-              class="w-full px-5 py-2.5 rounded-xl bg-primary-600 hover:bg-primary-700 text-white text-sm transition font-bold focus-ring"
+              class="w-full px-4 py-2 rounded-lg bg-primary-600 hover:bg-primary-700 text-white text-sm transition font-semibold focus-ring"
             >
               تحميل مجاني
             </button>
