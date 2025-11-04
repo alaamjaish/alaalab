@@ -122,6 +122,15 @@
     .mobile-menu-link {
       -webkit-tap-highlight-color: transparent;
     }
+
+    /* Hide scrollbar but keep functionality */
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
   </style>
 </head>
 
@@ -202,16 +211,16 @@
               <a href="#contact" data-scroll-to="contact" class="inline-flex items-center justify-center px-5 py-3 rounded-xl border border-slate-300 text-slate-800 hover:bg-slate-50 transition focus-ring">Contact Me</a>
             </div>
 
-            <div class="flex flex-wrap gap-2 pt-3" data-stagger="40">
-              <!-- Mobile: Show only 3 key short badges -->
-              <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-xs">RAG Systems</span>
-              <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-xs">AI Agents</span>
-              <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-xs">Automation</span>
-
-              <!-- Desktop: Show additional detailed badges -->
-              <span class="hidden md:inline-flex px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-xs">API Integration</span>
-              <span class="hidden md:inline-flex px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-xs">Custom AI Apps</span>
-              <span class="hidden md:inline-flex px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-xs">Workflow Design</span>
+            <!-- Badge Container: Horizontal scroll on mobile, wrap on desktop -->
+            <div class="pt-3 -mx-5 px-5 md:mx-0 md:px-0" data-stagger="40">
+              <div class="flex md:flex-wrap gap-2 overflow-x-auto md:overflow-x-visible scrollbar-hide snap-x snap-mandatory">
+                <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-xs whitespace-nowrap snap-start">RAG Systems</span>
+                <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-xs whitespace-nowrap snap-start">AI Agent Development</span>
+                <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-xs whitespace-nowrap snap-start">No-code Automation (n8n, Make)</span>
+                <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-xs whitespace-nowrap snap-start">API Integration & System Design</span>
+                <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-xs whitespace-nowrap snap-start">Custom AI Applications</span>
+                <span class="px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200 text-xs whitespace-nowrap snap-start">Workflow Automation</span>
+              </div>
             </div>
           </div>
 
