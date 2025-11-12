@@ -136,8 +136,15 @@
         <span class="font-bold text-slate-900 text-sm sm:text-base">Alaa Lab | AI Solutions</span>
       </a>
 
-      <!-- Desktop Navigation -->
-      <div class="hidden md:flex items-center gap-6 text-sm">
+      <!-- Language Switcher & Desktop Navigation -->
+      <div class="hidden md:flex items-center gap-4 text-sm">
+        <!-- Language Switcher -->
+        <div class="flex items-center gap-1.5 px-2 py-1 rounded-lg border border-slate-200 bg-white/80 backdrop-blur-sm">
+          <a href="/index.html" class="text-xs font-semibold px-2 py-1 rounded text-slate-700 hover:bg-slate-100 transition">العربية</a>
+          <span class="text-slate-300 text-xs">|</span>
+          <a href="/english.html" class="text-xs font-semibold px-2 py-1 rounded bg-primary-600 text-white">English</a>
+        </div>
+
         <a href="#portfolio" data-scroll-to="portfolio" class="text-slate-700 hover:text-slate-900">Portfolio</a>
         <a href="#process" data-scroll-to="process" class="text-slate-700 hover:text-slate-900">How It Works</a>
         <a href="#who" data-scroll-to="who" class="text-slate-700 hover:text-slate-900">Who I Help</a>
@@ -145,16 +152,25 @@
         <a href="#cta" data-scroll-to="cta" class="px-4 py-2 rounded-xl bg-primary-600 text-white hover:bg-primary-700 transition focus-ring">Book Consultation</a>
       </div>
 
-      <!-- Mobile Menu Button -->
-      <button
-        id="mobileMenuBtn"
-        class="md:hidden w-10 h-10 rounded-lg hover:bg-slate-100 grid place-items-center transition focus-ring"
-        aria-label="Menu"
-      >
-        <svg class="w-6 h-6 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-        </svg>
-      </button>
+      <!-- Mobile Language Switcher & Menu Button -->
+      <div class="md:hidden flex items-center gap-2">
+        <!-- Mobile Language Switcher -->
+        <div class="flex items-center gap-1 px-1.5 py-1 rounded-lg border border-slate-200 bg-white/80 backdrop-blur-sm">
+          <a href="/index.html" class="text-[10px] font-bold px-1.5 py-0.5 rounded text-slate-700 hover:bg-slate-100 transition">ع</a>
+          <a href="/english.html" class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-primary-600 text-white">EN</a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button
+          id="mobileMenuBtn"
+          class="w-10 h-10 rounded-lg hover:bg-slate-100 grid place-items-center transition focus-ring"
+          aria-label="Menu"
+        >
+          <svg class="w-6 h-6 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
     </nav>
   </header>
 
@@ -743,6 +759,46 @@
           closeMenu();
         }
       });
+    })();
+
+    // ==== Language Detection & Preference
+    (function() {
+      const LANG_KEY = 'preferred_language';
+      const currentPage = window.location.pathname;
+      const isArabicPage = currentPage.includes('index.html') || currentPage === '/' || currentPage === '';
+      const isEnglishPage = currentPage.includes('english.html');
+
+      // Store language preference when user manually switches
+      const languageSwitchers = document.querySelectorAll('a[href="/index.html"], a[href="/english.html"]');
+      languageSwitchers.forEach(link => {
+        link.addEventListener('click', (e) => {
+          const targetLang = link.getAttribute('href').includes('english') ? 'en' : 'ar';
+          localStorage.setItem(LANG_KEY, targetLang);
+        });
+      });
+
+      // Auto-detect and redirect on first visit (only if no preference is set)
+      const storedLang = localStorage.getItem(LANG_KEY);
+
+      if (!storedLang) {
+        // First visit - detect browser language
+        const browserLang = navigator.language || navigator.userLanguage;
+        const langCode = browserLang.split('-')[0].toLowerCase(); // Get 'ar' from 'ar-SA', 'en' from 'en-US'
+
+        // Redirect based on browser language
+        if (langCode === 'ar' && isEnglishPage) {
+          // Browser is Arabic but user is on English page - redirect to Arabic
+          localStorage.setItem(LANG_KEY, 'ar');
+          window.location.href = '/index.html';
+        } else if (langCode === 'en' && (isArabicPage || currentPage === '/')) {
+          // Browser is English but user is on Arabic page - redirect to English
+          localStorage.setItem(LANG_KEY, 'en');
+          window.location.href = '/english.html';
+        } else {
+          // For all other languages or if already on correct page, set based on current page
+          localStorage.setItem(LANG_KEY, isEnglishPage ? 'en' : 'ar');
+        }
+      }
     })();
   </script>
 </body>
